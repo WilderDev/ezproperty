@@ -6,6 +6,7 @@ import { RegisterComponent } from "./features/auth/register/register.component";
 import { VerifyComponent } from "./features/auth/verify/verify.component";
 import { PropertyManagerComponent } from "./features/kanban/property-manager/property-manager.component";
 import { TicketComponent } from "./features/kanban/ticket/ticket.component";
+import { MaintenanceStaffComponent } from "./features/kanban/maintenance-staff/maintenance-staff.component";
 
 const routes: Routes = [
 	{
@@ -30,9 +31,19 @@ const routes: Routes = [
     component: PropertyManagerComponent,
   },
   {
-      path: 'ticket/:id',
+    path: 'ticket/:id',
       component: TicketComponent
-  }
+  },
+  {
+    path: 'assignedtasks/:id',
+    component: MaintenanceStaffComponent
+  },
+  // {
+  //   path: 'addtenant'
+  // },
+  // {
+  //   path: 'addstaff'
+  // },
 
 ];
 

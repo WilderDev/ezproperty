@@ -9,9 +9,10 @@ import { HttpClientModule, provideHttpClient, withFetch, withInterceptorsFromDi 
 import { VerifyComponent } from './features/auth/verify/verify.component';
 import { PropertyManagerComponent } from './features/kanban/property-manager/property-manager.component';
 import { TicketComponent } from './features/kanban/ticket/ticket.component';
+import { MaintenanceStaffComponent } from './features/kanban/maintenance-staff/maintenance-staff.component';
 
 @NgModule({
-	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent],
+	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent, MaintenanceStaffComponent],
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
 	providers: [provideClientHydration(), provideHttpClient(withInterceptorsFromDi(),withFetch())],
 	bootstrap: [AppComponent]
