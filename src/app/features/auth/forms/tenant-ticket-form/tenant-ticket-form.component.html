@@ -42,4 +42,33 @@
 		/>
 		<p *ngIf="!phoneRef.vaild && phoneRef.touched">* Please enter your phone number.</p>
 	</div>
+	<!-- input for Tenant Email -->
+	<div>
+		<label for="email">Email:</label>
+		<input
+			type="email"
+			ngModel
+			[placeholder]="defaultEmail"
+			name="email"
+			id="email"
+			#emailRef="ngModel"
+			required="true"
+			email
+		/>
+		<p *ngIf="!emailRef.vaild && email.touched">* Please enter your Email</p>
+	</div>
+	<!-- Text Area for Teant Issues -->
+	<div>
+		<label>Tell us what is wrong</label>
+		<textarea
+			name="Issues"
+			id="Issues"
+			cols="30"
+			rows="10"
+			[placeholder]="defaultIssue"
+			#issueRef="ngModel"
+			required="true"
+		></textarea>
+		<p *ngIf="!issueRef.vaild && issueRef.touched">*Please enter your Issue here</p>
+	</div>
 </form>
