@@ -14,6 +14,7 @@ import {
 import { VerifyComponent } from "./features/auth/verify/verify.component";
 import { TenantTicketFormComponent } from "./features/auth/forms/tenant-ticket-form/tenant-ticket-form.component";
 import { WorkerFormComponent } from "./features/auth/forms/worker-form/worker-form.component";
+import { NewTenantFormComponent } from "./features/auth/forms/new-tenant-form/new-tenant-form.component";
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { WorkerFormComponent } from "./features/auth/forms/worker-form/worker-fo
 		RegisterComponent,
 		VerifyComponent,
 		TenantTicketFormComponent,
-		WorkerFormComponent
+		WorkerFormComponent,
+		NewTenantFormComponent
 	],
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
 	providers: [provideClientHydration(), provideHttpClient(withInterceptorsFromDi(), withFetch())],

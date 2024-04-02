@@ -1,1 +1,45 @@
-<p>tenant-ticket-form works!</p>
+<form (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
+	<legend>Tenant Iusses:</legend>
+	<!-- input for Teants First Name -->
+	<div>
+		<label for="fName">First Name:</label>
+		<input
+			type="text"
+			ngModel
+			[placeholder]="defaultFirstame"
+			name="fName"
+			id="fName"
+			#fNameRef="ngModel"
+			required="true"
+		/>
+		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your First Name.</p>
+	</div>
+	<!-- input for Tenants Last Name -->
+	<div>
+		<label for="lName">Last Name:</label>
+		<input
+			type="text"
+			ngModel
+			name="lName"
+			id="lName"
+			[placeholder]="deafaultLastName"
+			#LNameref="ngModel"
+			required="true"
+		/>
+		<p *ngIf="!lNameRef.vaild && lNameRef.touched">* Please enter your Last Name.</p>
+	</div>
+	<!-- input for Tenant phone number -->
+	<div>
+		<label for="phone">Phone Number:</label>
+		<input
+			type="number"
+			ngModel
+			[placeholder]="defaultPhone"
+			name="phone"
+			id="phone"
+			#phoneRef="ngModel"
+			required="true"
+		/>
+		<p *ngIf="!phoneRef.vaild && phoneRef.touched">* Please enter your phone number.</p>
+	</div>
+</form>
