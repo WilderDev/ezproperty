@@ -6,11 +6,12 @@ import { map } from "rxjs/operators";
 
 import { environment } from "../../../environments/environment";
 import { Ticket } from "../models/ticket";
+import { response } from "express";
 
 
 @Injectable({ providedIn: 'root'})
 export class TicketService {
-    private ticket = new BehaviorSubject<Ticket | undefined | null>(null)
+    private ticketSub = new BehaviorSubject<Ticket | undefined | null>(null)
 
   constructor(
     private router: Router,
@@ -18,7 +19,7 @@ export class TicketService {
     ) { }
 
     public get currentTicket() {
-      return this.ticket.asObservable();
+      return this.ticketSub.asObservable();
     }
 
     addNewTicket(ticket: Ticket) {
@@ -30,14 +31,23 @@ export class TicketService {
     }
 
     getTicketById (id: string) {
-      return this.http.get<Ticket>(`${environment.API_URL}/tickets/find/${id}`)
+
+      return this.http.get<{success: true,
+      data: {ticket: Ticket}}>(`${environment.API_URL}/tickets/find/${id}`).pipe(map(response => response.data.ticket))
+
+
     }
 
     updateTicket (id: string, params: any) {
       return this.http.patch(`${environment.API_URL}/tickets/edit/${id}`, params).pipe(map(x => {
-        const ticket = {...this.ticket, ...params};
+        const ticket = {...this.ticketSub, ...params};
 
-        this.ticket.next(ticket);
+        console.log("params:", params)
+        console.log("ticketSub: ", this.ticketSub)
+        console.log(ticket)
+        this.ticketSub.next(ticket);
+
+        console.log(ticket)
         return x
       }))
     }
