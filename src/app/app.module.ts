@@ -10,9 +10,11 @@ import { VerifyComponent } from './features/auth/verify/verify.component';
 import { PropertyManagerComponent } from './features/kanban/property-manager/property-manager.component';
 import { TicketComponent } from './features/kanban/ticket/ticket.component';
 import { MaintenanceStaffComponent } from './features/kanban/maintenance-staff/maintenance-staff.component';
+import { RegisterTenantComponent } from './features/auth/register-tenant/register-tenant.component';
+import { RegisterMaintenanceComponent } from './features/auth/register-maintenance/register-maintenance.component';
 
 @NgModule({
-	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent, MaintenanceStaffComponent],
+	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent, MaintenanceStaffComponent, RegisterTenantComponent, RegisterMaintenanceComponent],
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
 	providers: [provideClientHydration(), provideHttpClient(withInterceptorsFromDi(),withFetch())],
 	bootstrap: [AppComponent]
