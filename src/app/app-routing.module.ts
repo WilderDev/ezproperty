@@ -8,6 +8,8 @@ import { PropertyManagerComponent } from "./features/kanban/property-manager/pro
 import { TicketComponent } from "./features/kanban/ticket/ticket.component";
 import { MaintenanceStaffComponent } from "./features/kanban/maintenance-staff/maintenance-staff.component";
 import { AuthGuard } from "./shared/guards/auth.guard";
+import { ManagerGuard } from "./shared/guards/manager.guard";
+import { StaffGuard } from "./shared/guards/staff.guard";
 
 const routes: Routes = [
 	{
@@ -30,6 +32,7 @@ const routes: Routes = [
 	},
 	{
 		path: "kanban",
+		// canActivate: [StaffGuard],
 		component: PropertyManagerComponent
 	},
 	{
