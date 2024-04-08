@@ -1,28 +1,29 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { map, take } from 'rxjs/operators';
+import { Observable, of } from "rxjs";
+import { map, take, catchError } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: "root"
 })
 export class AuthGuard {
-  constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
+	// Function that checks for authorized user. If there is a user continue; If not, return to login page
+	canActivate(): Observable<boolean> {
+		return this.authService.me().pipe(
+			map((response) => {
+				// if the call was successful then return true
 
-  // Function that checks for authorized user. If there is a user continue; If not, return to login page
-  canActivate(): Observable<boolean> {
-    return this.authService.currentUser.pipe(
-      take(1),
-      map((user) => {
-        if (user) {
-          return true;
-        } else {
-          this.router.navigate(['/', 'login'])
-          return false;
-        }
-      })
-    )
-  }
+				return true; // this allows the user to access the route
+			}),
+			catchError((error) => {
+				// Navigate to login on error
+				this.router.navigate(["/", "login"]);
+				// Return false so the user cannot access the route
+				return of(false);
+			})
+		);
+	}
 }

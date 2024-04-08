@@ -7,11 +7,13 @@ import { VerifyComponent } from "./features/auth/verify/verify.component";
 import { PropertyManagerComponent } from "./features/kanban/property-manager/property-manager.component";
 import { TicketComponent } from "./features/kanban/ticket/ticket.component";
 import { MaintenanceStaffComponent } from "./features/kanban/maintenance-staff/maintenance-staff.component";
+import { AuthGuard } from "./shared/guards/auth.guard";
 
 const routes: Routes = [
 	{
 		path: "",
 		pathMatch: "full",
+		canActivate: [AuthGuard],
 		component: AppComponent
 	},
 	{
@@ -22,29 +24,28 @@ const routes: Routes = [
 		path: "register",
 		component: RegisterComponent
 	},
-  {
-    path: "verify",
-    component: VerifyComponent
-  },
-  {
-    path: "kanban",
-    component: PropertyManagerComponent,
-  },
-  {
-    path: 'ticket/:id',
-      component: TicketComponent
-  },
-  {
-    path: 'assignedtasks/:id',
-    component: MaintenanceStaffComponent
-  },
-  // {
-  //   path: 'addtenant'
-  // },
-  // {
-  //   path: 'addstaff'
-  // },
-
+	{
+		path: "verify",
+		component: VerifyComponent
+	},
+	{
+		path: "kanban",
+		component: PropertyManagerComponent
+	},
+	{
+		path: "ticket/:id",
+		component: TicketComponent
+	},
+	{
+		path: "assignedtasks/:id",
+		component: MaintenanceStaffComponent
+	}
+	// {
+	//   path: 'addtenant'
+	// },
+	// {
+	//   path: 'addstaff'
+	// },
 ];
 
 @NgModule({
