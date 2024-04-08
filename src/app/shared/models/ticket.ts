@@ -4,7 +4,14 @@ export class Ticket {
   type?: string;
   priorityLevel?: string;
   assignedWorker?: string;
-  propertyId?: string;
+  propertyId?: {
+    _id?: string;
+    streetAddress?: string;
+    aptNumber?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+  };
   description?: string;
   image?: string;
 }

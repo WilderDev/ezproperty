@@ -6,7 +6,7 @@ import { map } from "rxjs/operators";
 
 import { environment } from "../../../environments/environment";
 import { Ticket } from "../models/ticket";
-import { response } from "express";
+
 
 
 @Injectable({ providedIn: 'root'})
@@ -42,18 +42,14 @@ export class TicketService {
       return this.http.patch(`${environment.API_URL}/tickets/edit/${id}`, params).pipe(map(x => {
         const ticket = {...this.ticketSub, ...params};
 
-        console.log("params:", params)
-        console.log("ticketSub: ", this.ticketSub)
-        console.log(ticket)
         this.ticketSub.next(ticket);
 
-        console.log(ticket)
         return x
       }))
     }
 
     deleteTicket (id: string) {
-      return this.http.delete(`${environment.API_URL}/trailers/delete/${id}`).pipe(map(x => {
+      return this.http.delete(`${environment.API_URL}/tickets/delete/${id}`).pipe(map(x => {
         return x
       }))
     }
