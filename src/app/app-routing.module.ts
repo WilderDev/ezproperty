@@ -9,13 +9,15 @@ import { TicketComponent } from "./features/kanban/ticket/ticket.component";
 import { MaintenanceStaffComponent } from "./features/kanban/maintenance-staff/maintenance-staff.component";
 import { RegisterTenantComponent } from "./features/auth/register-tenant/register-tenant.component";
 import { RegisterMaintenanceComponent } from "./features/auth/register-maintenance/register-maintenance.component";
+import { TenantComponent } from "./features/tenants/tenant/tenant.component";
+import { EmployeeComponent } from "./features/employees/employee/employee.component";
 
 const routes: Routes = [
-	{
-		path: "",
-		pathMatch: "full",
-		component: AppComponent
-	},
+	// {
+	// 	path: "",
+	// 	pathMatch: "full",
+	// 	component: AppComponent
+	// },
 	{
 		path: "login",
 		component: LoginComponent
@@ -25,11 +27,19 @@ const routes: Routes = [
 		component: RegisterComponent
 	},
   {
-    path: "newtenant",
+    path: "addtenant",
     component: RegisterTenantComponent
   },
   {
-    path: "newemployee",
+    path: "tenants",
+    component: TenantComponent
+  },
+  {
+    path: "employee",
+    component: EmployeeComponent
+  },
+  {
+    path: "addstaff",
     component: RegisterMaintenanceComponent
   },
   {

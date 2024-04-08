@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { AuthService, CreateUser } from "../../../shared/services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
-import { response } from "express";
+
 
 @Component({
   selector: 'app-register-tenant',
