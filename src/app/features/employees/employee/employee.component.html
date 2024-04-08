@@ -4,15 +4,15 @@
   <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Tenant List</h2>
 
   <div class=" bg-zinc-700 px-1  rounded">
-    <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100">
+    <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" *ngFor="let staff of staff">
       <p>
-        Employee Name: John Smith
+        Employee Name: {{staff.firstName}} {{staff.middleInitial}} {{staff.lastName}}
         <br>
-        Specialties:
+        Specialties: {{staff.specialties}}
         <br>
-        Work Schedule:
+        Work Schedule: {{staff.workSchedule}}
         <br>
-        Assigned Work Orders: 0
+        Assigned Work Orders:
 
       </p>
 

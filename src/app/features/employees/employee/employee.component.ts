@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs';
+import { StaffService } from '../../../shared/services/staff.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss'
 })
-export class EmployeeComponent {
+export class EmployeeComponent
+  implements OnInit{
+    staff?: any[];
 
+    constructor(
+      private staffService: StaffService
+    ) { }
+
+    ngOnInit(): void {
+      this.staffService.getAllStaff().pipe(first()).subscribe(staff => this.staff = staff)
+
+    }
 }
