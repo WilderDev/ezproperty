@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, tap } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { environment } from "../../../environments/environment";
@@ -44,7 +44,7 @@ export class AuthService {
 	}
 
 	// Used to check User Credentials
-	me() {
+	me(): Observable<any> {
 		return this.httpClient.get(`${environment.API_URL}/auth/me`, { withCredentials: true });
 	}
 
