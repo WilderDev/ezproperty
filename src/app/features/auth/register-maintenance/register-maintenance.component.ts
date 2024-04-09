@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { AuthService, CreateUser } from "../../../shared/services/auth.service";
+import { AuthService } from "../../../shared/services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 
@@ -28,18 +28,17 @@ export class RegisterMaintenanceComponent {
 	// On Submit Function
 	onSubmit() {
     if (this.registerForm.invalid) return;
-    const formValue = this.registerForm.getRawValue() as CreateUser;
+    const formValue = this.registerForm.getRawValue();
 
     if (!formValue) return;
 
     this.authSubscription.add(
       this.authService.register(formValue).subscribe((response) => {
-        const {user} = response;
 
         console.log(response)
 
-        console.log(response)
-        this.authService.setUser(user);
+
+
         // Navigate to Home Page after Successful Register
         // this.router.navigate(['/'],)
       })

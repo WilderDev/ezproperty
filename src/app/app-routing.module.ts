@@ -10,14 +10,18 @@ import { MaintenanceStaffComponent } from "./features/kanban/maintenance-staff/m
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { ManagerGuard } from "./shared/guards/manager.guard";
 import { StaffGuard } from "./shared/guards/staff.guard";
+import { TenantComponent } from "./features/tenants/tenant/tenant.component";
+import { EmployeeComponent } from "./features/employees/employee/employee.component";
+import { RegisterTenantComponent } from "./features/auth/register-tenant/register-tenant.component";
+import { RegisterMaintenanceComponent } from "./features/auth/register-maintenance/register-maintenance.component";
 
 const routes: Routes = [
-	{
-		path: "",
-		pathMatch: "full",
-		canActivate: [AuthGuard],
-		component: AppComponent
-	},
+	// {
+	// 	path: "",
+	// 	pathMatch: "full",
+	// 	// canActivate: [AuthGuard],
+	// 	component: AppComponent
+	// },
 	{
 		path: "login",
 		component: LoginComponent
@@ -31,7 +35,7 @@ const routes: Routes = [
 		component: VerifyComponent
 	},
 	{
-		path: "kanban",
+		path: "adminmanager",
 		// canActivate: [StaffGuard],
 		component: PropertyManagerComponent
 	},
@@ -42,7 +46,23 @@ const routes: Routes = [
 	{
 		path: "assignedtasks/:id",
 		component: MaintenanceStaffComponent
-	}
+	},
+  {
+    path: "tenantlist",
+    component: TenantComponent
+  },
+  {
+    path: "employeelist",
+    component: EmployeeComponent
+  },
+  {
+    path: "registertenant",
+    component: RegisterTenantComponent
+  },
+  {
+    path: "registeremployee",
+    component: RegisterMaintenanceComponent
+  }
 	// {
 	//   path: 'addtenant'
 	// },

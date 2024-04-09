@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms"
 import { AuthService } from "../../../shared/services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
-import { response } from "express";
 
 @Component({
 	selector: "app-register",
@@ -15,6 +14,7 @@ export class RegisterComponent {
 	registerForm = new FormGroup({
 		username: new FormControl("", [Validators.required]),
 		email: new FormControl("", [Validators.required, Validators.email]), // make sure it is a valid email address
+    role: new FormControl("MANAGER"),
 		password: new FormControl("", [Validators.required])
 	});
 
@@ -30,15 +30,17 @@ export class RegisterComponent {
 		if (this.registerForm.invalid) return;
 		const formValue = this.registerForm.getRawValue();
 
+    console.log(formValue)
+
 		if (!formValue) return;
 
-		this.authSubscription.add(
-			this.authService.register(formValue).subscribe((response) => {
-				console.log(response);
-				// Navigate to Login Page after Successful Register
-				this.router.navigate(["/login"]);
-			})
-		);
+		// this.authSubscription.add(
+		// 	this.authService.register(formValue).subscribe((response) => {
+		// 		console.log(response);
+		// 		// Navigate to Login Page after Successful Register
+		// 		this.router.navigate(["/login"]);
+		// 	})
+		// );
 	}
 
 	ngOnDestroy() {
