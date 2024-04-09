@@ -70,7 +70,7 @@ export class RegisterTenantComponent {
 
 
         // Navigate to Home Page after Successful Register
-        this.router.navigate(['/adminmanager'],)
+        this.router.navigate(['/tenantlist'],)
       })
     )
 
