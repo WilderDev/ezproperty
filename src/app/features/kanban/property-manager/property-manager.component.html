@@ -1,0 +1,303 @@
+<div class="flex justify-end">
+  <button class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="viewToggle()">
+    <p *ngIf="this.isMainView">Change to Priority view</p>
+    <p *ngIf="!this.isMainView">Change to Main View</p>
+  </button>
+</div>
+
+<div>
+  <section class="w-dvw flex flex-row justify-center" *ngIf="this.isMainView">
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Backlog</h2>
+
+      <div class=" bg-zinc-700 px-1  rounded">
+        <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Backlog'">
+          <p>
+            Tenent: {{ticket.propertyId}}
+            <br>
+            Category: {{ ticket.type}}
+            <br>
+            Urgency: {{ ticket.priorityLevel}}
+          </p>
+        </a>
+        <div *ngFor="let ticket of tickets |kanbanfilter:'Backlog'">
+          <p class="text-blue-200" *ngIf="tickets.length==0">No Tickets Here </p>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded">In Progress</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'In-Progress'">
+            <p *ngIf="tickets.length">
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+          </a>
+          <!-- <p>No Current Tickets In Progress</p> -->
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Blocked</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Blockage'">
+            <p *ngIf="ticket.progress == 'Blockage'">
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Completed</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Completed'">
+            <p *ngIf="ticket.progress == 'Completed'">
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'Completed'">No Recent Tickets Completed</p>
+          </a>
+        </div>
+    </div>
+
+  </section>
+</div>
+
+
+
+<div *ngIf="!isMainView">
+  <h1>High Priority</h1>
+  <section class="w-dvw flex flex-row justify-center" >
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Backlog</h2>
+
+      <div class=" bg-zinc-700 px-1  rounded">
+        <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Backlog' |urgencyfilter:'HIGH'">
+          <p>
+            Tenent: {{ticket.propertyId}}
+            <br>
+            Category: {{ ticket.type}}
+            <br>
+            Urgency: {{ ticket.priorityLevel}}
+          </p>
+          <p *ngIf="!ticket.progress == 'Backlog'">No Current Tickets in Backlog</p>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded">In Progress</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'In-Progress' | urgencyfilter:'HIGH'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'In-Progress'">No Current Tickets In Progress</p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Blocked</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Blockage' | urgencyfilter:'HIGH'">
+            <p *ngIf="ticket.progress == 'Blockage' && ticket.priorityLevel =='HIGH'">
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Completed</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Completed' | urgencyfilter:'HIGH'">
+            <p *ngIf="ticket.progress == 'Completed' && ticket.priorityLevel =='HIGH'">
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'Completed' ">No Recent Tickets Completed</p>
+          </a>
+        </div>
+    </div>
+
+  </section>
+
+  <br><br>
+  <h1>Medium Priority</h1>
+  <section class="w-dvw flex flex-row justify-center" >
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Backlog</h2>
+
+      <div class=" bg-zinc-700 px-1  rounded">
+        <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Backlog' | urgencyfilter:'MEDIUM'">
+          <p>
+            Tenent: {{ticket.propertyId}}
+            <br>
+            Category: {{ ticket.type}}
+            <br>
+            Urgency: {{ ticket.priorityLevel}}
+          </p>
+          <p *ngIf="!ticket.progress == 'Backlog'">No Current Tickets in Backlog</p>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded">In Progress</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'In-Progress' | urgencyfilter:'MEDIUM'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'In-Progress'">No Current Tickets In Progress</p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Blocked</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Blockage' | urgencyfilter:'MEDIUM'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Completed</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Completed' | urgencyfilter:'MEDIUM'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'Completed' ">No Recent Tickets Completed</p>
+          </a>
+        </div>
+    </div>
+
+  </section>
+
+  <br><br>
+  <h1>Low Priority</h1>
+  <section class="w-dvw flex flex-row justify-center" >
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Backlog</h2>
+
+      <div class=" bg-zinc-700 px-1  rounded">
+        <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Backlog' | urgencyfilter:'LOW'">
+          <p>
+            Tenent: {{ticket.propertyId}}
+            <br>
+            Category: {{ ticket.type}}
+            <br>
+            Urgency: {{ ticket.priorityLevel}}
+          </p>
+          <p *ngIf="!ticket.progress == 'Backlog'">No Current Tickets in Backlog</p>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded">In Progress</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'In-Progress' |urgencyfilter:'LOW'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'In-Progress'">No Current Tickets In Progress</p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Blocked</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Blockage' | urgencyfilter:'LOW'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+          </a>
+
+        </div>
+    </div>
+
+    <div class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Completed</h2>
+        <div class=" bg-zinc-700 px-1  rounded">
+          <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" routerLink="/ticket/{{ticket._id}}" routerLinkActive="active" *ngFor="let ticket of tickets | kanbanfilter:'Completed' | urgencyfilter:'LOW'">
+            <p>
+              Tenent: {{ticket.propertyId}}
+              <br>
+              Category: {{ ticket.type}}
+              <br>
+              Urgency: {{ ticket.priorityLevel}}
+            </p>
+            <p *ngIf="!ticket.progress == 'Completed' ">No Recent Tickets Completed</p>
+          </a>
+        </div>
+    </div>
+
+  </section>
+</div>
+
+
+<!--         routerLink="ticket/{{ticket.id}}" routerLinkActive="active" -->

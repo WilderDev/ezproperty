@@ -1,0 +1,144 @@
+<div class="card">
+	<form [formGroup]="employeeRegisterForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <h1 class="font-semibold text-2xl text-center">New Employee Details</h1>
+		<div class="flex flex-col gap-1">
+			<label for="firstName" class="text-sm font-semibold">First Name</label>
+			<input
+				type="text"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.firstName"
+				id="firstName"
+			/>
+		</div>
+		<div class="flex flex-col gap-1">
+			<label for="middleInitial" class="text-sm font-semibold">Middle Initial</label>
+			<input
+				type="text"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.middleInitial"
+				id="middleInitial"
+			/>
+		</div>
+		<div class="flex flex-col gap-1">
+			<label for="lastName" class="text-sm font-semibold">Last Name</label>
+			<input
+				type="text"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.lastName"
+				id="lastName"
+			/>
+		</div>
+    <div class="flex flex-col gap-1">
+			<label for="phoneNumber" class="text-sm font-semibold">Phone Number</label>
+			<input
+        type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.phoneNumber"
+				id="phoneNumber"
+        placeholder="ex. 555-555-1234"
+			/>
+		</div>
+
+    <h1 class="font-semibold text-2xl text-center">Specialization Experience</h1>
+		<div class="flex flex-col gap-1">
+
+      <div *ngFor="let choice of specializations; let i=index" >
+      <label for="">
+        <input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)">{{choice.description}}
+      </label></div>
+
+
+      <!-- <div>
+        <label for="HVAC">
+        <input
+				type="checkbox"
+				class="input"
+        placeholder="HVAC"
+
+        value="HVAC"
+				id="HVAC"
+        /> HVAC</label>
+      </div>
+
+      <div>
+        <input
+				type="checkbox"
+				class="input"
+        placeholder="ELECTRICAL"
+        value="ELECTRICAL"
+				id="ELECTRICAL"
+        /> <label for="ELECTRICAL">Electrical</label>
+      </div>
+
+      <div>
+        <input
+				type="checkbox"
+				class="input"
+        placeholder="PLUMBING"
+        value="PLUMBING"
+				id="PLUMBING"
+        /> <label for="PLUMBING">Plumbing</label>
+      </div>
+
+      <div>
+        <input
+				type="checkbox"
+				class="input"
+        placeholder="STRUCTURAL"
+        value="STRUCTURAL"
+				id="STRUCTURAL"
+        /> <label for="STRUCTURAL">Structural</label>
+      </div>
+
+      <div>
+        <input
+				type="checkbox"
+				class="input"
+        placeholder="GENERAL"
+        value="GENERAL"
+				id="GENERAL"
+        />
+        <label for="GENERAL">General</label>
+      </div> -->
+
+
+
+		</div>
+
+    <!-- [formControl]="employeeRegisterForm.controls.workSpecialization" -->
+
+    <h1 class="font-semibold text-2xl text-center">User Details</h1>
+		<div class="flex flex-col gap-1">
+			<label for="username" class="text-sm font-semibold">Username</label>
+			<input
+				type="text"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.username"
+				id="username"
+			/>
+		</div>
+		<div class="flex flex-col gap-1">
+			<label for="email" class="text-sm font-semibold">Email</label>
+			<input
+				type="email"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.email"
+				id="email"
+			/>
+		</div>
+		<div class="flex flex-col gap-1">
+			<label for="password" class="text-sm font-semibold">Password</label>
+			<input
+				type="password"
+				class="input"
+				[formControl]="employeeRegisterForm.controls.password"
+				id="password"
+			/>
+		</div>
+
+		<button [disabled]="!employeeRegisterForm.valid" class="rounded border-2 border-blue-500 bg-zinc-200 hover:bg-zinc-100">Register</button>
+
+
+
+	</form>
+</div>

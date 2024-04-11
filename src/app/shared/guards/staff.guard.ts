@@ -7,7 +7,7 @@ import { AuthService } from "../services/auth.service";
 @Injectable({
 	providedIn: "root"
 })
-export class AuthGuard {
+export class StaffGuard {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	// Function that checks for authorized user. If there is a user continue; If not, return to login page
@@ -15,8 +15,18 @@ export class AuthGuard {
 		return this.authService.me().pipe(
 			map((response) => {
 				// if the call was successful then return true
+				// console.log(response);
+				const role = response.data.user.role;
 
-				return true; // this allows the user to access the route
+				if (role === "STAFF" || role === "MANAGER") {
+					return true; // this allows the user to access the route
+				}
+
+				if (role === "TENANT") {
+					this.router.navigate(["/", "tenant"]);
+				}
+
+				return false; // this allows the user to access the route
 			}),
 			catchError((error) => {
 				// Navigate to login on error
