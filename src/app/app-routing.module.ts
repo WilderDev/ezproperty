@@ -36,33 +36,39 @@ const routes: Routes = [
 	},
 	{
 		path: "adminmanager",
-		// canActivate: [StaffGuard],
+		canActivate: [ManagerGuard],
 		component: PropertyManagerComponent
 	},
 	{
 		path: "ticket/:id",
+		canActivate: [StaffGuard],
 		component: TicketComponent
 	},
 	{
 		path: "assignedtasks/:id",
+		canActivate: [ManagerGuard],
 		component: MaintenanceStaffComponent
 	},
-  {
-    path: "tenantlist",
-    component: TenantComponent
-  },
-  {
-    path: "employeelist",
-    component: EmployeeComponent
-  },
-  {
-    path: "registertenant",
-    component: RegisterTenantComponent
-  },
-  {
-    path: "registeremployee",
-    component: RegisterMaintenanceComponent
-  }
+	{
+		path: "tenantlist",
+		canActivate: [ManagerGuard],
+		component: TenantComponent
+	},
+	{
+		path: "employeelist",
+		canActivate: [ManagerGuard],
+		component: EmployeeComponent
+	},
+	{
+		path: "registertenant",
+		canActivate: [ManagerGuard],
+		component: RegisterTenantComponent
+	},
+	{
+		path: "registeremployee",
+		canActivate: [ManagerGuard],
+		component: RegisterMaintenanceComponent
+	}
 	// {
 	//   path: 'addtenant'
 	// },
