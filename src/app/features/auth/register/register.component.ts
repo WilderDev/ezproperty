@@ -34,13 +34,13 @@ export class RegisterComponent {
 
 		if (!formValue) return;
 
-		// this.authSubscription.add(
-		// 	this.authService.register(formValue).subscribe((response) => {
-		// 		console.log(response);
-		// 		// Navigate to Login Page after Successful Register
-		// 		this.router.navigate(["/login"]);
-		// 	})
-		// );
+		this.authSubscription.add(
+			this.authService.register(formValue).subscribe((response) => {
+				console.log(response);
+				// Navigate to Login Page after Successful Register
+				this.router.navigate(["/login"]);
+			})
+		);
 	}
 
 	ngOnDestroy() {
