@@ -15,9 +15,11 @@ import { RegisterMaintenanceComponent } from './features/auth/register-maintenan
 import { NavbarComponent } from './features/navbar/navbar.component';
 import { TenantComponent } from './features/tenants/tenant/tenant.component';
 import { EmployeeComponent } from './features/employees/employee/employee.component';
+import { KanbanFilterPipe } from "./shared/pipes/kanbanpipe";
+import { UrgencyFilterPipe } from "./shared/pipes/urgencypipe";
 
 @NgModule({
-	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent, MaintenanceStaffComponent, RegisterTenantComponent, RegisterMaintenanceComponent, NavbarComponent, TenantComponent, EmployeeComponent],
+	declarations: [AppComponent, LoginComponent, RegisterComponent, VerifyComponent, PropertyManagerComponent, TicketComponent, MaintenanceStaffComponent, RegisterTenantComponent, RegisterMaintenanceComponent, NavbarComponent, TenantComponent, EmployeeComponent, KanbanFilterPipe, UrgencyFilterPipe],
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
 	providers: [provideClientHydration(), provideHttpClient(withInterceptorsFromDi(),withFetch())],
 	bootstrap: [AppComponent]

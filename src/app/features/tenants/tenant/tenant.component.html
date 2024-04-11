@@ -3,11 +3,11 @@
   <h2 class="bg-sky-400  flex justify-center font-bold rounded"> Tenant List</h2>
 
   <div class=" bg-zinc-700 px-1  rounded">
-    <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100">
+    <a class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100" *ngFor="let tenant of tenants">
       <p>
-        Tenant Name: John Smith
+        Tenant Name: {{tenant.firstName}} {{tenant.lastName}}
         <br>
-        Property: 40912 Streetname Place APT W
+        Property: {{tenant.propertyId.streetAddress}} {{tenant.propertyId.aptNumber}}
         <br>
         Open Tickets: 0
 

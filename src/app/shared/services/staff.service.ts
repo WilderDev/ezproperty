@@ -31,13 +31,13 @@ export class StaffService {
     }
 
     getAllStaff() {
-      return this.http.get<{success: boolean, data:{staff: Staff[]}}>(`${environment.API_URL}/workers/all`).pipe(map(response => response.data.staff))
+      return this.http.get<{success: boolean, data:{staff: Staff[]}}>(`${environment.API_URL}/workers/get-all-workers`).pipe(map(response => response.data.staff))
     }
 
     getStaffById (id: string) {
 
       return this.http.get<{success: true,
-      data: {staff: Staff}}>(`${environment.API_URL}/workers/find/${id}`).pipe(map(response => response.data.staff))
+      data: {staff: Staff}}>(`${environment.API_URL}/workers/get-worker/${id}`).pipe(map(response => response.data.staff))
 
 
     }

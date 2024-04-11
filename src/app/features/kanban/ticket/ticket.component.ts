@@ -75,7 +75,7 @@ export class TicketComponent implements OnInit{
         next: () => {
 
           console.log('Ticket Saved')
-          this.router.navigateByUrl('/kanban');
+          this.router.navigateByUrl('/adminmanager');
         },
         error: error => {
           this.submitting = false;

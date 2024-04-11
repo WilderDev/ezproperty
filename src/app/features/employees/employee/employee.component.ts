@@ -9,14 +9,14 @@ import { StaffService } from '../../../shared/services/staff.service';
 })
 export class EmployeeComponent
   implements OnInit{
-    staff?: any[];
+    workers?: any[];
 
     constructor(
       private staffService: StaffService
     ) { }
 
     ngOnInit(): void {
-      this.staffService.getAllStaff().pipe(first()).subscribe(staff => this.staff = staff)
+      this.staffService.getAllStaff().pipe(first()).subscribe(staff => this.workers = staff)
 
     }
 }
