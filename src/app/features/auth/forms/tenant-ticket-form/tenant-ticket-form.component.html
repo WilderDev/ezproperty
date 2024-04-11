@@ -3,58 +3,31 @@
 	<!-- input for Teants First Name -->
 	<div>
 		<label for="fName">First Name:</label>
-		<input
-			type="text"
-			ngModel
-			[placeholder]="defaultFirstame"
-			name="fName"
-			id="fName"
-			#fNameRef="ngModel"
-			required="true"
-		/>
+		<input type="text" name="fName" id="fName" required="true" />
 		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your First Name.</p>
+	</div>
+	<!-- Middle Name Input -->
+	<div>
+		<label for="M">Middle Name:</label>
+		<input type="text" name="fName" id="fName" required="true" />
+		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your Middle Name.</p>
 	</div>
 	<!-- input for Tenants Last Name -->
 	<div>
 		<label for="lName">Last Name:</label>
-		<input
-			type="text"
-			ngModel
-			name="lName"
-			id="lName"
-			[placeholder]="deafaultLastName"
-			#LNameref="ngModel"
-			required="true"
-		/>
+		<input type="text" name="lName" id="lName" required="true" />
 		<p *ngIf="!lNameRef.vaild && lNameRef.touched">* Please enter your Last Name.</p>
 	</div>
 	<!-- input for Tenant phone number -->
 	<div>
 		<label for="phone">Phone Number:</label>
-		<input
-			type="number"
-			ngModel
-			[placeholder]="defaultPhone"
-			name="phone"
-			id="phone"
-			#phoneRef="ngModel"
-			required="true"
-		/>
+		<input type="number" name="phone" id="phone" required="true" />
 		<p *ngIf="!phoneRef.vaild && phoneRef.touched">* Please enter your phone number.</p>
 	</div>
 	<!-- input for Tenant Email -->
 	<div>
 		<label for="email">Email:</label>
-		<input
-			type="email"
-			ngModel
-			[placeholder]="defaultEmail"
-			name="email"
-			id="email"
-			#emailRef="ngModel"
-			required="true"
-			email
-		/>
+		<input type="email" name="email" id="email" required="true" email />
 		<p *ngIf="!emailRef.vaild && email.touched">* Please enter your Email</p>
 	</div>
 	<!-- Text Area for Teant Issues -->
@@ -66,13 +39,27 @@
 			cols="30"
 			rows="10"
 			[placeholder]="defaultIssue"
-			#issueRef="ngModel"
 			required="true"
 		></textarea>
 		<p *ngIf="!issueRef.vaild && issueRef.touched">*Please enter your Issue here</p>
 	</div>
-	<!-- img upload input TODO! (do we need this, will make email a pain in the ass)-->
 	<!-- types of Issuses -->
-	<!-- priority of Issue -->
+	<div>
+		<label for="issuseType">What kind of Issue are you having?</label>
+		<mat-radio-group aria-label="Select an option">
+			<mat-radio-button value="1">Plumbing</mat-radio-button>
+			<mat-radio-button value="2">Electrical</mat-radio-button>
+			<mat-radio-button value="3">Structural</mat-radio-button>
+			<mat-radio-button value="4">HVAC</mat-radio-button>
+			<mat-radio-button value="5">General</mat-radio-button>
+			<mat-radio-button value="6">Pest</mat-radio-button>
+			<mat-radio-button value="7">Other</mat-radio-button>
+		</mat-radio-group>
+		<!-- use mat-checkbox for issuse types -->
+		<!-- types of issues are enum: ["Plumbing", "Electrical", "Structural", "HVAC", "General", "Pest", "Other"] -->
+	</div>
 	<!-- Submit Form -->
 </form>
+
+<!-- when logged in i need to auto gen all user info -->
+<!--  -->

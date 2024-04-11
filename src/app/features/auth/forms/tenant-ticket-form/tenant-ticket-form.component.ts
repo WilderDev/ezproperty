@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class TenantTicketFormComponent implements OnInit {
 	tenantIssueForm: FormGroup;
 
-	ngOnInit(): void {
+	ngOnInit() {
 		this.tenantIssueForm = new FormGroup({
 			username: new FormControl(null, Validators.required),
 			email: new FormControl(null, [Validators.required, Validators.email]),
