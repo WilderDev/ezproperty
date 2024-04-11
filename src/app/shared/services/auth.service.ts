@@ -16,7 +16,7 @@ export class AuthService {
 	) {}
 
 	// Function to Register New User
-	register({ username, email, password }) {
+	register({ username, email, password, role }) {
 		console.log(username, email, password);
 
 		return this.httpClient.post(
@@ -24,7 +24,8 @@ export class AuthService {
 			{
 				username,
 				email,
-				password
+				password,
+        role,
 			},
 			{ withCredentials: true }
 		);
