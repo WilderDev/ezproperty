@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { state } from "@angular/animations";
 import { PropertyService } from "../../../shared/services/property.service";
+import { TenantService } from "../../../shared/services/tenant.service";
 
 @Component({
 	selector: "app-register-tenant",
@@ -32,6 +33,7 @@ export class RegisterTenantComponent {
 			middleInitial: new FormControl(""),
 			lastName: new FormControl(""),
 			phoneNumber: new FormControl(""),
+			propertyId: new FormControl(""),
 
 			username: new FormControl("", [Validators.required]),
 			email: new FormControl("", [Validators.required, Validators.email]), // make sure it is a valid email address
@@ -42,7 +44,7 @@ export class RegisterTenantComponent {
 	private authSubscription = new Subscription();
 
 	constructor(
-		private formBuilder: FormBuilder,
+		private tenantService: TenantService,
 		private authService: AuthService,
 		private propertyService: PropertyService,
 		private router: Router
@@ -59,18 +61,18 @@ export class RegisterTenantComponent {
 
 		if (!formValue) return;
 
-		this.propertyService
-			.addNewProperty(formValue.property)
-			.subscribe((res) => console.log(res));
+		this.propertyService.addNewProperty(formValue.property).subscribe((res) => {
+			formValue.user.propertyId = res.data.property._id;
+			console.log(formValue.user);
+			this.authSubscription.add(
+				this.tenantService.addNewTenant(formValue.user).subscribe((response) => {
+					console.log(response);
 
-		this.authSubscription.add(
-			this.authService.register(formValue.user).subscribe((response) => {
-				console.log(response);
-
-				// Navigate to Home Page after Successful Register
-				this.router.navigate(["/tenantlist"]);
-			})
-		);
+					// Navigate to Home Page after Successful Register
+					// this.router.navigate(["/tenantlist"]);
+				})
+			);
+		});
 	}
 
 	ngOnDestroy() {

@@ -4,6 +4,10 @@ Username: mmouse
 Email: mmouse@disney.com
 Password: manager
 
+Username: traceTest
+Email: tracetest@test.com
+Password: manager
+
 ## STAFF
 
 Username: goofy
