@@ -63,13 +63,12 @@ export class RegisterTenantComponent {
 
 		this.propertyService.addNewProperty(formValue.property).subscribe((res) => {
 			formValue.user.propertyId = res.data.property._id;
-			console.log(formValue.user);
 			this.authSubscription.add(
 				this.tenantService.addNewTenant(formValue.user).subscribe((response) => {
 					console.log(response);
 
 					// Navigate to Home Page after Successful Register
-					// this.router.navigate(["/tenantlist"]);
+					this.router.navigate(["/tenantlist"]);
 				})
 			);
 		});
