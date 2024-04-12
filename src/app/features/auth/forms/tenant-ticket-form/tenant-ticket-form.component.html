@@ -1,38 +1,69 @@
-<form (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
+<form [formGroup]="tenantIssuseForm" (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
 	<legend>Tenant Iusses:</legend>
 	<!-- input for Teants First Name -->
-	<div>
-		<label for="fName">First Name:</label>
-		<input type="text" name="fName" id="fName" required="true" />
+	<div class="flex flex-col gap-1">
+		<label for="fName" class="text-sm font-semibold">First Name:</label>
+		<input
+			type="text"
+			name="fName"
+			id="fName"
+			required="true"
+			[formControl]="tenantIssuseForm.controls.fName"
+		/>
 		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your First Name.</p>
 	</div>
 	<!-- Middle Name Input -->
-	<div>
-		<label for="M">Middle Name:</label>
-		<input type="text" name="fName" id="fName" required="true" />
+	<div class="flex flex-col gap-1">
+		<label for="middleInitial" class="text-sm font-semibold">Middle Initial:</label>
+		<input
+			type="text"
+			name="middleInitial"
+			id="middleInitial"
+			required="true"
+			[formControl]="tenantIssuseForm.controls.middleInitial"
+		/>
 		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your Middle Name.</p>
 	</div>
 	<!-- input for Tenants Last Name -->
-	<div>
-		<label for="lName">Last Name:</label>
-		<input type="text" name="lName" id="lName" required="true" />
+	<div class="flex flex-col gap-1">
+		<label for="lName" class="text-sm font-semibold">Last Name:</label>
+		<input
+			type="text"
+			name="lName"
+			id="lName"
+			required="true"
+			[formControl]="tenantIssuseForm.control.lName"
+		/>
 		<p *ngIf="!lNameRef.vaild && lNameRef.touched">* Please enter your Last Name.</p>
 	</div>
 	<!-- input for Tenant phone number -->
-	<div>
-		<label for="phone">Phone Number:</label>
-		<input type="number" name="phone" id="phone" required="true" />
+	<div class="flex flex-col gap-1">
+		<label for="phone" class="text-sm font-semibold">Phone Number:</label>
+		<input
+			type="number"
+			name="phone"
+			id="phone"
+			required="true"
+			[formControl]="tenantIssuseForm.control.phoneNumber"
+		/>
 		<p *ngIf="!phoneRef.vaild && phoneRef.touched">* Please enter your phone number.</p>
 	</div>
 	<!-- input for Tenant Email -->
-	<div>
-		<label for="email">Email:</label>
-		<input type="email" name="email" id="email" required="true" email />
+	<div class="flex flex-col gap-1">
+		<label for="email" class="text-sm font-semibold">Email:</label>
+		<input
+			type="email"
+			name="email"
+			id="email"
+			required="true"
+			email
+			[formControl]="tenantIssuseForm.control.email"
+		/>
 		<p *ngIf="!emailRef.vaild && email.touched">* Please enter your Email</p>
 	</div>
 	<!-- Text Area for Teant Issues -->
-	<div>
-		<label>Tell us what is wrong</label>
+	<div class="flex flex-col gap-1">
+		<label class="text-sm font-semibold">Tell us what is wrong</label>
 		<textarea
 			name="Issues"
 			id="Issues"
@@ -44,19 +75,17 @@
 		<p *ngIf="!issueRef.vaild && issueRef.touched">*Please enter your Issue here</p>
 	</div>
 	<!-- types of Issuses -->
-	<div>
-		<label for="issuseType">What kind of Issue are you having?</label>
-		<mat-radio-group aria-label="Select an option">
-			<mat-radio-button value="1">Plumbing</mat-radio-button>
-			<mat-radio-button value="2">Electrical</mat-radio-button>
-			<mat-radio-button value="3">Structural</mat-radio-button>
-			<mat-radio-button value="4">HVAC</mat-radio-button>
-			<mat-radio-button value="5">General</mat-radio-button>
-			<mat-radio-button value="6">Pest</mat-radio-button>
-			<mat-radio-button value="7">Other</mat-radio-button>
-		</mat-radio-group>
-		<!-- use mat-checkbox for issuse types -->
-		<!-- types of issues are enum: ["Plumbing", "Electrical", "Structural", "HVAC", "General", "Pest", "Other"] -->
+	<div class="flex flex-col gap-1">
+		<label for="issuseType" class="text-sm font-semibold"
+			>What kind of Issue are you having?</label
+		>
+		<div *ngFor="let choice of specializations; let i = index">
+			<label for="">
+				<input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)" />{{
+					choice.description
+				}}
+			</label>
+		</div>
 	</div>
 	<!-- Submit Form -->
 	<button type="submit"></button>
@@ -64,4 +93,6 @@
 
 <!-- TODO when logged in i need to auto gen all user info -->
 <!-- TODO do not allow teant to change info  -->
+<!-- TODO submit and save to tickets -->
+<!-- TODO send email to PM -->
 <!-- service to pull user for atuo gen info  -->
