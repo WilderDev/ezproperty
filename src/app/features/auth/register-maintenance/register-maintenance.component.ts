@@ -32,6 +32,8 @@ export class RegisterMaintenanceComponent {
     middleInitial: new FormControl("", [Validators.required]),
     lastName: new FormControl("", [Validators.required]),
     phoneNumber: new FormControl("", [Validators.required]),
+    startShift: new FormControl(""),
+    endShift: new FormControl(""),
     workSpecialization: new FormArray([])
 
 
