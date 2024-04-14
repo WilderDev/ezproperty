@@ -47,65 +47,36 @@
         <input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)">{{choice.description}}
       </label></div>
 
+      <br>
 
-      <!-- <div>
-        <label for="HVAC">
+      <div class="flex flex-row justify-space">
+      <div class="flex flex-col gap-1 mx-2 w-32">
+        <label for="startShift" class="text-sm font-semibold">Shift Start Time</label>
         <input
-				type="checkbox"
-				class="input"
-        placeholder="HVAC"
-
-        value="HVAC"
-				id="HVAC"
-        /> HVAC</label>
-      </div>
-
-      <div>
-        <input
-				type="checkbox"
-				class="input"
-        placeholder="ELECTRICAL"
-        value="ELECTRICAL"
-				id="ELECTRICAL"
-        /> <label for="ELECTRICAL">Electrical</label>
-      </div>
-
-      <div>
-        <input
-				type="checkbox"
-				class="input"
-        placeholder="PLUMBING"
-        value="PLUMBING"
-				id="PLUMBING"
-        /> <label for="PLUMBING">Plumbing</label>
-      </div>
-
-      <div>
-        <input
-				type="checkbox"
-				class="input"
-        placeholder="STRUCTURAL"
-        value="STRUCTURAL"
-				id="STRUCTURAL"
-        /> <label for="STRUCTURAL">Structural</label>
-      </div>
-
-      <div>
-        <input
-				type="checkbox"
-				class="input"
-        placeholder="GENERAL"
-        value="GENERAL"
-				id="GENERAL"
+          type="text"
+          class="input"
+          [formControl]="employeeRegisterForm.controls.startShift"
+          id="startShift"
+          placeholder="08:00"
         />
-        <label for="GENERAL">General</label>
-      </div> -->
+      </div>
+      <br><br><br>
+      <div class="flex flex-col gap-1 mx-2 w-32">
+        <label for="endShift" class="text-sm font-semibold"
+        >Shift End Time
+        </label>
+        <input
+          type="text"
+          class="input"
+          [formControl]="employeeRegisterForm.controls.endShift"
+          id="endShift"
+          placeholder="17:00"
+        />
+      </div>
 
-
+    </div>
 
 		</div>
-
-    <!-- [formControl]="employeeRegisterForm.controls.workSpecialization" -->
 
     <h1 class="font-semibold text-2xl text-center">User Details</h1>
 		<div class="flex flex-col gap-1">

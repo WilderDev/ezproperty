@@ -30,6 +30,8 @@ export class RegisterMaintenanceComponent {
 		middleInitial: new FormControl("", [Validators.required]),
 		lastName: new FormControl("", [Validators.required]),
 		phoneNumber: new FormControl("", [Validators.required]),
+		startShift: new FormControl(""),
+		endShift: new FormControl(""),
 		workSpecialization: new FormArray([])
 	});
 
@@ -69,7 +71,7 @@ export class RegisterMaintenanceComponent {
 			// Add a new control in the arrayForm
 			formArray.push(new FormControl(event.target.value));
 		} else {
-		/* unselected */
+			/* unselected */
 			// find the unselected element
 			let i: number = 0;
 
