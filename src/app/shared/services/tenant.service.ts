@@ -10,57 +10,58 @@ import { Tenant } from "../models/tenant";
 import { response } from "express";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: "root"
 })
 export class TenantService {
+	private tenantSub = new BehaviorSubject<Tenant | undefined | null>(null);
 
-  private tenantSub = new BehaviorSubject<Tenant | undefined | null>(null)
+	constructor(private router: Router, private http: HttpClient) {}
 
+	public get currentTenant() {
+		return this.tenantSub.asObservable();
+	}
 
-  constructor(
-    private router: Router,
-    private http: HttpClient
-  ) { }
+	addNewTenant(tenant: Tenant) {
+		return this.http.post(`${environment.API_URL}/tenants/new-user`, tenant, {
+			withCredentials: true
+		});
+	}
 
+	getAllTenants() {
+		return this.http
+			.get<{ success: boolean; data: { tenants: Tenant[] } }>(
+				`${environment.API_URL}/tenants/get-all-tenants`
+			)
+			.pipe(map((response) => response.data.tenants));
+	}
 
-    public get currentTenant() {
-      return this.tenantSub.asObservable();
-    }
+	getTenantById(id: string) {
+		return this.http
+			.get<{ success: true; data: { tenant: Tenant } }>(
+				`${environment.API_URL}/tenants/get-tenant/${id}`
+			)
+			.pipe(map((response) => response.data.tenant));
+	}
 
-    addNewTenant(tenant: Tenant) {
-      return this.http.post(`${environment.API_URL}/tenants/new-user`, tenant)
-    }
+	// NEED BACKEND ROUTE/CONTROLLER
+	updateTenant(id: string, params: any) {
+		return this.http.patch(`${environment.API_URL}/tenants/edit/${id}`, params).pipe(
+			map((x) => {
+				const tenant = { ...this.tenantSub, ...params };
 
-    getAllTenants() {
-      return this.http.get<{success: boolean, data:{tenants: Tenant[]}}>(`${environment.API_URL}/tenants/get-all-tenants`).pipe(map(response => response.data.tenants))
-    }
+				this.tenantSub.next(tenant);
 
-    getTenantById (id: string) {
+				return x;
+			})
+		);
+	}
 
-      return this.http.get<{success: true,
-      data: {tenant: Tenant}}>(`${environment.API_URL}/tenants/get-tenant/${id}`).pipe(map(response => response.data.tenant))
-
-
-    }
-
-
-    // NEED BACKEND ROUTE/CONTROLLER
-    updateTenant (id: string, params: any) {
-      return this.http.patch(`${environment.API_URL}/tenants/edit/${id}`, params).pipe(map(x => {
-        const tenant = {...this.tenantSub, ...params};
-
-
-        this.tenantSub.next(tenant);
-
-
-        return x
-      }))
-    }
-
-    // NEED BACKEND ROUTE/CONTROLLER AUTH??
-    deleteTenant (id: string) {
-      return this.http.delete(`${environment.API_URL}/remove-tenant/${id}`).pipe(map(x => {
-        return x
-      }))
-    }
+	// NEED BACKEND ROUTE/CONTROLLER AUTH??
+	deleteTenant(id: string) {
+		return this.http.delete(`${environment.API_URL}/remove-tenant/${id}`).pipe(
+			map((x) => {
+				return x;
+			})
+		);
+	}
 }
