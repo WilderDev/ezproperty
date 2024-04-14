@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../../../shared/services/auth.service";
-import { Subscription } from "rxjs";
+import { Subscription, map } from "rxjs";
 import { Router } from "@angular/router";
 
 @Component({
@@ -28,11 +28,24 @@ export class LoginComponent {
 		if (!formValue) return;
 
 		this.authSubscription.add(
-			this.authService.login(formValue).subscribe((response) => {
-				console.log(response);
+			this.authService.login(formValue).subscribe((res: any) => {
+				res = res.data.user.role;
+				console.log(res);
 
-				// Navigate to Home Page after Successful Register
-				this.router.navigate(["/"]);
+				if (res === "MANAGER") {
+					// Navigate to Home Page after Successful Register
+					return this.router.navigate(["adminmanager"]);
+				}
+
+				if (res === "WORKER") {
+					return this.router.navigate(["assignedtasks"]);
+				}
+				// if(res === "TENANT") {
+				// return this.router.navigate([""])
+				// }
+				else {
+					return this.router.navigate(["/"]);
+				}
 			})
 		);
 	}
