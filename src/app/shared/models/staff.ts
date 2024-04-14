@@ -4,7 +4,7 @@ export class Staff {
 	middleInitial?: string;
 	lastName?: string;
 	phoneNumber?: string;
-	workSpecialization?: [string];
+	workSpecialization?: any[];
 	workSchedule?: string;
 	role?: string;
 	manager?: string;
