@@ -47,30 +47,30 @@ export class TenantTicketFormComponent implements OnInit {
 
 	// ON SUBMIT FUNCTION
 	onSubmit() {
-		if (this.tenantIssueForm.invalid) return;
-		const formValue = this.tenantIssueForm.getRawValue();
+		// if (this.tenantIssueForm.invalid) return;
+		// const formValue = this.tenantIssueForm.getRawValue();
 
-		if (!formValue) return;
+		// if (!formValue) return;
 	}
 
-	onCheckChange(event) {
-		const formArray: FormArray = this.tenantIssueForm.get("workSpecialization") as FormArray;
+	// onCheckChange(event) {
+	// 	const formArray: FormArray = this.tenantIssueForm.get("workSpecialization") as FormArray;
 
-		if (event.target.checked) {
-			formArray.push(new FormControl(event.target.vaule));
-		} else {
-			let i: number = 0;
+	// 	if (event.target.checked) {
+	// 		formArray.push(new FormControl(event.target.vaule));
+	// 	} else {
+	// 		let i: number = 0;
 
-			formArray.controls.forEach((ctrl: FormControl) => {
-				if (ctrl.value == event.target.vaule) {
-					formArray.removeAt(i);
-					return;
-				}
+	// 		formArray.controls.forEach((ctrl: FormControl) => {
+	// 			if (ctrl.value == event.target.vaule) {
+	// 				formArray.removeAt(i);
+	// 				return;
+	// 			}
 
-				i++;
-			});
-		}
-	}
+	// 			i++;
+	// 		});
+	// 	}
+	// }
 }
 
 //navigate to tenant issuse form on login

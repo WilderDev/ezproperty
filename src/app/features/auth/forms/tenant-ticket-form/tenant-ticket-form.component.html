@@ -1,14 +1,14 @@
-<form [formGroup]="tenantIssueForm" (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
+<form [formGroup]="tenantIssueForm" (ngSubmit)="onSubmit()">
 	<legend>Tenant Iusses:</legend>
 
 	<!-- <div>Current Tenant {{  }}</div> -->
-	<div class="flex flex-col gap-1">
+	<!-- <div class="flex flex-col gap-1">
 		<label class="text-sm font-semibold">Tell us what is wrong</label>
 		<textarea name="Issues" id="Issues" cols="30" rows="10" required="true"></textarea>
 		<p>*Please enter your Issue here</p>
-	</div>
+	</div> -->
 	<!-- types of Issuses -->
-	<div class="flex flex-col gap-1">
+	<!-- <div class="flex flex-col gap-1">
 		<label for="issuseType" class="text-sm font-semibold"
 			>What kind of Issue are you having?</label
 		>
@@ -22,7 +22,7 @@
 				/>{{ choice.description }}
 			</label>
 		</div>
-	</div>
+	</div> -->
 	<!-- priority lvl of job -->
 	<!-- <div class="flex flex-col gap-1">
 		<label for="priorityLvl" class="text-sm font-semibold"
@@ -87,13 +87,13 @@
 		</div>
 	</div> -->
 	<!-- Submit Form -->
-	<button
+	<!-- <button
 		[disabled]="!tenantIssueForm.vaild"
 		type="submit"
 		class="rounded border-2 border-blue-500 bg-zinc-200 hover:bg-zinc-100"
 	>
 		SUBMIT
-	</button>
+	</button> -->
 </form>
 
 <!-- TODO when logged in i need to auto gen all user info -->
