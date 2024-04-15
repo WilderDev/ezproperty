@@ -27,12 +27,14 @@ export class TenantService {
 		});
 	}
 
-	getAllTenants() {
+	getAllTenants(): Observable<any> {
 		return this.http
 			.get<{ success: boolean; data: { tenants: Tenant[] } }>(
 				`${environment.API_URL}/tenants/get-all-tenants`
 			)
-			.pipe(map((response) => response.data.tenants));
+			.pipe(map((response) => response.data));
+
+
 	}
 
 	getTenantById(id: string) {

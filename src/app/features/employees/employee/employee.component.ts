@@ -16,7 +16,10 @@ export class EmployeeComponent
     ) { }
 
     ngOnInit(): void {
-      this.staffService.getAllStaff().pipe(first()).subscribe(staff => this.workers = staff)
+      this.staffService.getAllStaff().subscribe((staff) => {this.workers = staff
+        console.log(staff)
+      }
+      )
 
     }
 }

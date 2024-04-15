@@ -33,7 +33,7 @@ export class TicketService {
     getTicketById (id: string) {
 
       return this.http.get<{success: true,
-      data: {ticket: Ticket}}>(`${environment.API_URL}/tickets/find/${id}`).pipe(map(response => response.data.ticket))
+      data: {ticket: any}}>(`${environment.API_URL}/tickets/find/${id}`).pipe(map(response => response.data.ticket))
 
 
     }
