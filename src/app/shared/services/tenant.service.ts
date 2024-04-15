@@ -35,12 +35,12 @@ export class TenantService {
 			.pipe(map((response) => response.data.tenants));
 	}
 
-	getTenantById(id: string) {
+	getTenantById(id: string): Observable<any> {
 		return this.http
 			.get<{ success: true; data: { tenant: Tenant } }>(
 				`${environment.API_URL}/tenants/get-tenant/${id}`
 			)
-			.pipe(map((response) => response.data.tenant));
+			.pipe(map((response) => response.data));
 	}
 
 	// NEED BACKEND ROUTE/CONTROLLER

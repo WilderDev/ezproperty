@@ -1,78 +1,11 @@
-<form [formGroup]="tenantIssuseForm" (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
+<form [formGroup]="tenantIssueForm" (ngSubmit)="onSubmit()" #tenantIssueForm="ngForm">
 	<legend>Tenant Iusses:</legend>
-	<!-- input for Teants First Name -->
-	<div class="flex flex-col gap-1">
-		<label for="fName" class="text-sm font-semibold">First Name:</label>
-		<input
-			type="text"
-			name="fName"
-			id="fName"
-			required="true"
-			[formControl]="tenantIssuseForm.controls.fName"
-		/>
-		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your First Name.</p>
-	</div>
-	<!-- Middle Name Input -->
-	<div class="flex flex-col gap-1">
-		<label for="middleInitial" class="text-sm font-semibold">Middle Initial:</label>
-		<input
-			type="text"
-			name="middleInitial"
-			id="middleInitial"
-			required="true"
-			[formControl]="tenantIssuseForm.controls.middleInitial"
-		/>
-		<p *ngIf="!fNameRef.vaild && fNameRef.touched">* Please enter your Middle Name.</p>
-	</div>
-	<!-- input for Tenants Last Name -->
-	<div class="flex flex-col gap-1">
-		<label for="lName" class="text-sm font-semibold">Last Name:</label>
-		<input
-			type="text"
-			name="lName"
-			id="lName"
-			required="true"
-			[formControl]="tenantIssuseForm.control.lName"
-		/>
-		<p *ngIf="!lNameRef.vaild && lNameRef.touched">* Please enter your Last Name.</p>
-	</div>
-	<!-- input for Tenant phone number -->
-	<div class="flex flex-col gap-1">
-		<label for="phone" class="text-sm font-semibold">Phone Number:</label>
-		<input
-			type="number"
-			name="phone"
-			id="phone"
-			required="true"
-			[formControl]="tenantIssuseForm.control.phoneNumber"
-		/>
-		<p *ngIf="!phoneRef.vaild && phoneRef.touched">* Please enter your phone number.</p>
-	</div>
-	<!-- input for Tenant Email -->
-	<div class="flex flex-col gap-1">
-		<label for="email" class="text-sm font-semibold">Email:</label>
-		<input
-			type="email"
-			name="email"
-			id="email"
-			required="true"
-			email
-			[formControl]="tenantIssuseForm.control.email"
-		/>
-		<p *ngIf="!emailRef.vaild && email.touched">* Please enter your Email</p>
-	</div>
-	<!-- Text Area for Teant Issues -->
+
+	<!-- <div>Current Tenant {{  }}</div> -->
 	<div class="flex flex-col gap-1">
 		<label class="text-sm font-semibold">Tell us what is wrong</label>
-		<textarea
-			name="Issues"
-			id="Issues"
-			cols="30"
-			rows="10"
-			[placeholder]="defaultIssue"
-			required="true"
-		></textarea>
-		<p *ngIf="!issueRef.vaild && issueRef.touched">*Please enter your Issue here</p>
+		<textarea name="Issues" id="Issues" cols="30" rows="10" required="true"></textarea>
+		<p>*Please enter your Issue here</p>
 	</div>
 	<!-- types of Issuses -->
 	<div class="flex flex-col gap-1">
@@ -81,18 +14,90 @@
 		>
 		<div *ngFor="let choice of specializations; let i = index">
 			<label for="">
-				<input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)" />{{
-					choice.description
-				}}
+				<input
+					type="checkbox"
+					[formControl]="type"
+					[value]="choice.value"
+					(change)="onCheckChange($event)"
+				/>{{ choice.description }}
 			</label>
 		</div>
 	</div>
+	<!-- priority lvl of job -->
+	<!-- <div class="flex flex-col gap-1">
+		<label for="priorityLvl" class="text-sm font-semibold"
+			>Tell Us the importance of this job</label
+		>
+
+		<button
+			id="dropdownDefaultButton"
+			data-dropdown-toggle="dropdown"
+			class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+			type="button"
+		>
+			Issuse
+			<svg
+				class="w-2.5 h-2.5 ms-3"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 10 6"
+			>
+				<path
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="m1 1 4 4 4-4"
+				/>
+			</svg>
+		</button>
+
+		< Dropdown menu -->
+	<!-- <div
+			id="dropdown"
+			class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+		>
+			<ul
+				class="py-2 text-sm text-gray-700 dark:text-gray-200"
+				aria-labelledby="dropdownDefaultButton"
+			>
+				<li>
+					<a
+						href="#"
+						class="block px-4 py-2 hover:bg-green-300 dark:hover:bg-green-500 dark:hover:text-white"
+						>Low</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						class="block px-4 py-2 hover:bg-green-300 dark:hover:bg-green-500 dark:hover:text-white"
+						>Medium</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						class="block px-4 py-2 hover:bg-green-300 dark:hover:bg-green-500 dark:hover:text-white"
+						>High</a
+					>
+				</li>
+			</ul>
+		</div>
+	</div> -->
 	<!-- Submit Form -->
-	<button type="submit"></button>
+	<button
+		[disabled]="!tenantIssueForm.vaild"
+		type="submit"
+		class="rounded border-2 border-blue-500 bg-zinc-200 hover:bg-zinc-100"
+	>
+		SUBMIT
+	</button>
 </form>
 
 <!-- TODO when logged in i need to auto gen all user info -->
 <!-- TODO do not allow teant to change info  -->
 <!-- TODO submit and save to tickets -->
 <!-- TODO send email to PM -->
-<!-- service to pull user for atuo gen info  -->
+<!-- TODO service to pull user for atuo gen info  -->
