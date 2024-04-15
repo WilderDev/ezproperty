@@ -31,12 +31,13 @@
             </p>
 
             <hr class="border-slate-700 my-1">
-            <p class="flex justify-between">Assigned To: {{this.ticket.assignedWorker}}
-            <!-- <select name="workerSelect" formControlName="assignedWorker" placeholder="{{this.ticket.assignedWorker}}" *ngFor="let worker of workers">
+            <div class="flex flex-row">
+            <p class="flex justify-between">Assigned To: {{this.ticket.assignedWorker}} </p> <br>
+            <select name="workerSelect" formControlName="assignedWorker" placeholder="{{this.ticket.assignedWorker}}">
               <option>hello</option>
               <option value="{{this.worker._id}}">{{this.worker.firstName}} {{this.worker.lastName}}</option>
-            </select> -->
-            </p>
+            </select>
+            </div>
 
             <hr class="border-slate-700 my-1">
             <p class="flex justify-between">
