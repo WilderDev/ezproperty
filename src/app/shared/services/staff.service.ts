@@ -30,8 +30,8 @@ export class StaffService {
       return this.http.post(`${environment.API_URL}/workers/new-user`, staff)
     }
 
-    getAllStaff() {
-      return this.http.get<{success: boolean, data:{staff: Staff[]}}>(`${environment.API_URL}/workers/get-all-workers`).pipe(map(response => response.data.staff))
+    getAllStaff(): Observable<any> {
+      return this.http.get<{success: boolean, data:{staff: Staff[]}}>(`${environment.API_URL}/workers/get-all-workers`).pipe(map(response => response.data))
     }
 
     getStaffById (id: string) {
