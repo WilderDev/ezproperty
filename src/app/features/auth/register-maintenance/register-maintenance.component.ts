@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from "@ang
 import { AuthService } from "../../../shared/services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { StaffService } from "../../../shared/services/staff.service";
 
 @Component({
 	selector: "app-register-maintenance",
@@ -37,22 +38,24 @@ export class RegisterMaintenanceComponent {
 
 	private authSubscription = new Subscription();
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(
+		private staffService: StaffService,
+		private router: Router,
+		private authService: AuthService
+	) {}
 	// On Submit Function
 	onSubmit() {
 		if (this.employeeRegisterForm.invalid) return;
 		const formValue = this.employeeRegisterForm.getRawValue();
 
-		console.log(formValue);
-
 		if (!formValue) return;
 
 		this.authSubscription.add(
-			this.authService.register(formValue).subscribe((response) => {
+			this.staffService.addNewStaff(formValue).subscribe((response) => {
 				console.log(response);
 
 				// Navigate to Home Page after Successful Register
-				this.router.navigate(["/employeelist"]);
+				// this.router.navigate(["/employeelist"]);
 			})
 		);
 	}
