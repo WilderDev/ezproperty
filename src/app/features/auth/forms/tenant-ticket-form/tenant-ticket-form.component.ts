@@ -4,6 +4,8 @@ import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { TenantService } from "../../../../shared/services/tenant.service";
 import { AuthService } from "../../../../shared/services/auth.service";
+import { TicketService } from "../../../../shared/services/ticket.service";
+import { response } from "express";
 
 @Component({
 	selector: "app-tenant-ticket-form",
@@ -21,20 +23,18 @@ export class TenantTicketFormComponent implements OnInit {
 
 	// CREATE TENANT ISSUE FORM
 	tenantIssueForm = new FormGroup({
-		type: new FormControl("", [Validators.required]),
 		priorityLevel: new FormControl("", [Validators.required]),
 		description: new FormControl("", [Validators.required]),
-
-		role: new FormControl("TENANT"),
-
-		workSpecialization: new FormArray([])
+		progress: new FormControl("BACKLOG"),
+		work: new FormArray([])
 	});
 
 	constructor(
 		private authService: AuthService,
 		private tenantService: TenantService,
 		private formBuilder: FormBuilder,
-		private router: Router
+		private router: Router,
+		private ticketservice: TicketService
 	) {}
 
 	ngOnInit(): void {
@@ -47,30 +47,34 @@ export class TenantTicketFormComponent implements OnInit {
 
 	// ON SUBMIT FUNCTION
 	onSubmit() {
+		console.log("hello");
 		// if (this.tenantIssueForm.invalid) return;
-		// const formValue = this.tenantIssueForm.getRawValue();
-
-		// if (!formValue) return;
+		console.log("hello2");
+		const formValue = this.tenantIssueForm.getRawValue();
+		if (!formValue) return;
+		this.ticketservice.addNewTicket(formValue).subscribe((res) => {
+			console.log(res);
+		});
 	}
 
-	// onCheckChange(event) {
-	// 	const formArray: FormArray = this.tenantIssueForm.get("workSpecialization") as FormArray;
+	onCheckChange(event) {
+		const formArray: FormArray = this.tenantIssueForm.get("work") as FormArray;
 
-	// 	if (event.target.checked) {
-	// 		formArray.push(new FormControl(event.target.vaule));
-	// 	} else {
-	// 		let i: number = 0;
+		if (event.target.checked) {
+			formArray.push(new FormControl(event.target.value));
+		} else {
+			let i: number = 0;
 
-	// 		formArray.controls.forEach((ctrl: FormControl) => {
-	// 			if (ctrl.value == event.target.vaule) {
-	// 				formArray.removeAt(i);
-	// 				return;
-	// 			}
+			formArray.controls.forEach((ctrl: FormControl) => {
+				if (ctrl.value == event.target.vaule) {
+					formArray.removeAt(i);
+					return;
+				}
 
-	// 			i++;
-	// 		});
-	// 	}
-	// }
+				i++;
+			});
+		}
+	}
 }
 
 //navigate to tenant issuse form on login
