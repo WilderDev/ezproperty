@@ -101,6 +101,7 @@ export class TicketComponent implements OnInit{
 
     this.submitted = true;
 
+    this.loading = true
     // stop here if form is invalid
     if (this.assignForm.invalid) {
       return;
@@ -132,8 +133,8 @@ export class TicketComponent implements OnInit{
 
     private assignWorker() {
       return this.id
-      ?this.ticketService.assignWorker(this.id!, this.form.value)
-      : this.ticketService.assignWorker(this.id!, this.form.value)
+      ?this.ticketService.assignWorker(this.id!, this.assignForm.value)
+      : this.ticketService.assignWorker(this.id!, this.assignForm.value)
     }
 
 

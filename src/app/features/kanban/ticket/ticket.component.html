@@ -32,13 +32,13 @@
 
             <hr class="border-slate-700 my-1">
             <div class="flex flex-row">
-            <p class="flex justify-between">Assigned To: </p> <br>
+            <p class="flex justify-between">Assigned To: {{this.ticket.assignedWorker}}</p> <br>
             <form [formGroup]="assignForm" (ngSubmit)="assignSubmit()">
-            <select name="workerSelect" formControlName="assignedWorker" placeholder="{{this.ticket.assignedWorker}}" >
+            <select name="workerSelect" formControlName="assignedWorker">
               <option *ngFor="let worker of workers" value="{{this.worker._id}}">{{worker.firstName}} {{worker.lastName}}</option>
             </select>
 
-            <button type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="assignSubmit">Assign Worker</button>
+            <button type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="assignSubmit" [disabled]="this.loading">Assign Worker</button>
           </form>
             </div>
 
