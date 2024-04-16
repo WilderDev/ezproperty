@@ -6,6 +6,7 @@ import { Ticket } from '../../../shared/models/ticket';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
+import { WorkerService } from '../../../shared/services/worker.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TicketComponent implements OnInit{
   ticket: Ticket;
   id?: string;
   title!: string;
-
+  workers?: any[];
   isEditing = false;
 
   loading = false;
@@ -31,7 +32,8 @@ export class TicketComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private workerService: WorkerService
     ) { }
 
     ngOnInit(): void {
@@ -43,8 +45,8 @@ export class TicketComponent implements OnInit{
       this.form = this.formBuilder.group({
         progress: [''],
         priorityLevel: [''],
-        category: [''],
-        // assignedWorker: [''],
+        type: [''],
+        assignedWorker: [''],
         description: [''],
         });
 
@@ -53,6 +55,8 @@ export class TicketComponent implements OnInit{
 
     this.ticketService.getTicketById(this.id).pipe(first()).subscribe(x => {this.ticket = x; this.form.patchValue(x)
       this.loading = false;})
+
+      // this.workerService.getAllWorkers().pipe(first()).subscribe()
   }
 
     // convenience getter for easy access to form fields

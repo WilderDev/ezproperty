@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs';
 import { TenantService } from '../../../shared/services/tenant.service';
+import { Tenant } from '../../../shared/models/tenant';
 
 
 @Component({
@@ -17,7 +18,10 @@ export class TenantComponent
     ) { }
 
     ngOnInit(): void {
-      this.tenantService.getAllTenants().pipe(first()).subscribe(tenants => this.tenants = tenants)
+      this.tenantService.getAllTenants().subscribe((tenants) => {this.tenants = tenants}
+      )
+
+
 
     }
 }

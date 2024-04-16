@@ -46,7 +46,7 @@ const routes: Routes = [
 		component: TicketComponent
 	},
 	{
-		path: "assignedtasks/:id",
+		path: "assignedtasks",
 		canActivate: [ManagerGuard],
 		component: MaintenanceStaffComponent
 	},
