@@ -18,7 +18,7 @@ export class StaffGuard {
 				// console.log(response);
 				const role = response.data.user.role;
 
-				if (role === "STAFF" || role === "MANAGER") {
+				if (role === "WORKER" || role === "MANAGER") {
 					return true; // this allows the user to access the route
 				}
 
