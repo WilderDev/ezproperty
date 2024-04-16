@@ -38,6 +38,16 @@ export class TicketService {
 
     }
 
+    assignWorker (id: string, params: any) {
+      return this.http.patch(`${environment.API_URL}/tickets/edit/assign/${id}`, params).pipe(map(x => {
+        const ticket = {...this.ticketSub, ...params};
+
+        this.ticketSub.next(ticket);
+
+        return x
+      }))
+    }
+
     updateTicket (id: string, params: any) {
       return this.http.patch(`${environment.API_URL}/tickets/edit/${id}`, params).pipe(map(x => {
         const ticket = {...this.ticketSub, ...params};

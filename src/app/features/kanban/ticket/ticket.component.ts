@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { WorkerService } from '../../../shared/services/worker.service';
+import { StaffService } from '../../../shared/services/staff.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { WorkerService } from '../../../shared/services/worker.service';
 export class TicketComponent implements OnInit{
 
   form!: FormGroup;
+  assignForm?: FormGroup;
   ticket: Ticket;
   id?: string;
   title!: string;
@@ -33,20 +35,25 @@ export class TicketComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private ticketService: TicketService,
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private staffService: StaffService
     ) { }
 
     ngOnInit(): void {
 
       this.id = this.route.snapshot.params['id'];
 
+      this.assignForm = this.formBuilder.group({
+        assignedWorker: [''],
+        progress: ['In-Progress']
+      })
 
       // form with validation rules
       this.form = this.formBuilder.group({
         progress: [''],
         priorityLevel: [''],
         type: [''],
-        assignedWorker: [''],
+        // assignedWorker: [''],
         description: [''],
         });
 
@@ -56,7 +63,8 @@ export class TicketComponent implements OnInit{
     this.ticketService.getTicketById(this.id).pipe(first()).subscribe(x => {this.ticket = x; this.form.patchValue(x)
       this.loading = false;})
 
-      // this.workerService.getAllWorkers().pipe(first()).subscribe()
+      this.staffService.getAllStaff().subscribe((staff) => {this.workers = staff
+        console.log(staff)})
   }
 
     // convenience getter for easy access to form fields
@@ -86,6 +94,31 @@ export class TicketComponent implements OnInit{
         }
       })
   }
+
+  assignSubmit( ) {
+
+    console.log("form Values: ", this.form.value)
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.assignForm.invalid) {
+      return;
+    }
+
+    this.submitting = true;
+    this.assignWorker()
+    .pipe(first()).subscribe({
+      next: () => {
+
+        console.log('Ticket Saved')
+        this.router.navigateByUrl('/adminmanager');
+      },
+      error: error => {
+        this.submitting = false;
+      }
+    })
+}
   Edit() {
     this.isEditing = !this.isEditing;
 
@@ -97,6 +130,11 @@ export class TicketComponent implements OnInit{
       : this.ticketService.updateTicket(this.id!, this.form.value)
     }
 
+    private assignWorker() {
+      return this.id
+      ?this.ticketService.assignWorker(this.id!, this.form.value)
+      : this.ticketService.assignWorker(this.id!, this.form.value)
+    }
 
 
 }
