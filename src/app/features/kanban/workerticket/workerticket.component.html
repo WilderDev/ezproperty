@@ -1,0 +1,139 @@
+<main>
+
+  <div class="w-dvw flex justify-center">
+    <div class="flex flex-col w-3/4 border-2 rounded-lg m-.5 bg-zinc-700">
+      <h2 class="bg-sky-400  flex justify-center font-bold rounded "> Ticket Details</h2>
+
+      <div class=" bg-zinc-700 px-1  rounded">
+        <div class="bg-zinc-200 m-1 px-1 rounded flex flex-col ">
+
+
+          <div *ngIf="!isEditing">
+            <p>
+              Property: {{this.ticket?.propertyId}}
+            </p>
+            <hr class="border-slate-700 my-1">
+
+            <p class="flex justify-between" >
+            Current Status: {{this.ticket?.progress}}
+          </p>
+
+
+          <hr class="border-slate-700 my-1">
+          <p class="flex justify-between">
+            Urgency: {{this.ticket?.priorityLevel}}
+          </p>
+            <hr class="border-slate-700 my-1">
+
+            <p>
+            Category: {{this.ticket?.type}}
+
+            </p>
+
+            <hr class="border-slate-700 my-1">
+            <!-- <div class="flex flex-row">
+            <p class="flex justify-between">Assigned To: {{this.ticket.assignedWorker}}</p> <br>
+            <form [formGroup]="assignForm" (ngSubmit)="assignSubmit()">
+            <select name="workerSelect" formControlName="assignedWorker">
+              <option *ngFor="let worker of workers" value="{{this.worker._id}}">{{worker.firstName}} {{worker.lastName}}</option>
+            </select>
+
+            <button type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="assignSubmit" [disabled]="this.loading">Assign Worker</button>
+          </form>
+            </div> -->
+
+            <!-- <hr class="border-slate-700 my-1"> -->
+            <p class="flex justify-between">
+            Description: {{this.ticket?.description}}
+          </p>
+
+
+            <hr class="border-slate-700 my-1">
+            <p *ngIf="this.ticket?.image">
+            Image: <img src="{{this.ticket.image}}" alt="Ticket Picture" >
+            </p>
+          </div>
+
+          <div *ngIf="isEditing">
+            <form [formGroup]="form" (ngSubmit)="Submit()">
+              <p>
+                Property: {{this.ticket?.propertyId}}
+              </p>
+              <hr class="border-slate-700 my-1">
+
+              <div>
+                <label class="form-label"> Current Status
+                <select name="statusSelect" formControlName="progress" placeholder="{{this.ticket.progress}}">
+<!--
+                  <option value="Backlog">Backlog</option>
+                  <option value="In-Progress">In Progress</option> -->
+                  <option value="Blockage">Blocked</option>
+                  <option value="Completed">Completed</option>
+                </select></label>
+
+                </div>
+
+                <!-- <div>
+                  <label class="form-label"> Urgency
+                    <select name="prioritySelect" formControlName="priorityLevel" placeholder="{{this.ticket.priorityLevel}}">
+
+                      <option value="HIGH">High</option>
+                      <option value="MEDIUM">Medium</option>
+                      <option value="LOW">Low</option>
+                    </select></label>
+
+                  </div> -->
+
+                  <div>
+                    <label class="form-label"> Category
+                      <select name="typeSelect" formControlName="type" placeholder="{{this.ticket?.type}}">
+
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="Structural">Structural</option>
+                        <option value="HVAC">HVAC</option>
+                        <option value="General">General</option>
+                        <option value="Pest">Pest</option>
+                        <option value="Other">Other</option>
+                      </select></label>
+
+                    </div>
+
+                    <!-- <div>
+                      <label class="form-label"> Assign Worker
+                        <select name="select" formControlName="assignedWorker" placeholder="{{this.ticket.assignedWorker}}">
+
+                          <option value="None Assigned">None Assigned</option>
+
+                        </select></label>
+
+                      </div> -->
+
+                      <div>
+                        <label class="form-label"> Description or any Issues/Delays
+                        <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" /></label>
+
+                        </div>
+            </form>
+          </div>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="flex justify-between h-10 p-2">
+
+          <button *ngIf="!isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" routerLink="/assignedtasks" routerLinkActive="active">Go Back</button>
+          <button *ngIf="isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Edit()">Cancel</button>
+          <button *ngIf="isEditing" type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Submit()">Save Changes</button>
+          <button *ngIf="!isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Edit()">Edit</button>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </main>

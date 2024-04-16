@@ -2,20 +2,20 @@
 
 <div>
 	<section class="w-dvw flex flex-row justify-center" *ngIf="this.isMainView">
-		<div
-			class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100"
+		<!-- <div
+			class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100" -->
 		>
-			<h2 class="bg-sky-400 flex justify-center font-bold rounded">Backlog</h2>
+			<!-- <h2 class="bg-sky-400 flex justify-center font-bold rounded">Backlog</h2>
 
 			<div class="bg-zinc-700 px-1 rounded">
 				<a
 					class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100"
-					routerLink="/ticket/{{ ticket._id }}"
+					routerLink="/ticket/assignedticket/{{ ticket._id }}"
 					routerLinkActive="active"
 					*ngFor="let ticket of tickets | kanbanfilter : 'Backlog'"
 				>
 					<p>
-						Tenent: {{ ticket.propertyId }}
+						Tenant: {{ ticket.propertyId }}
 						<br />
 						Category: {{ ticket.type }}
 						<br />
@@ -26,7 +26,7 @@
 					<p class="text-blue-200" *ngIf="tickets.length == 0">No Tickets Here</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div
 			class="flex flex-col w-48 border-2 rounded-lg m-.5 bg-zinc-700 hover:w-96 hover: ease-in-out duration-100"
@@ -35,12 +35,12 @@
 			<div class="bg-zinc-700 px-1 rounded">
 				<a
 					class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100"
-					routerLink="/ticket/{{ ticket._id }}"
+					routerLink="/assignedticket/{{ ticket._id }}"
 					routerLinkActive="active"
 					*ngFor="let ticket of tickets | kanbanfilter : 'In-Progress'"
 				>
 					<p *ngIf="tickets.length">
-						Tenent: {{ ticket.propertyId }}
+						Tenant: {{ ticket.propertyId }}
 						<br />
 						Category: {{ ticket.type }}
 						<br />
@@ -58,12 +58,12 @@
 			<div class="bg-zinc-700 px-1 rounded">
 				<a
 					class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100"
-					routerLink="/ticket/{{ ticket._id }}"
+					routerLink="/assignedticket/{{ ticket._id }}"
 					routerLinkActive="active"
 					*ngFor="let ticket of tickets | kanbanfilter : 'Blockage'"
 				>
 					<p *ngIf="ticket.progress == 'Blockage'">
-						Tenent: {{ ticket.propertyId }}
+						Tenant: {{ ticket.propertyId }}
 						<br />
 						Category: {{ ticket.type }}
 						<br />
@@ -80,12 +80,12 @@
 			<div class="bg-zinc-700 px-1 rounded">
 				<a
 					class="bg-zinc-200 m-1 px-1 rounded flex flex-col hover:bg-zinc-100"
-					routerLink="/ticket/{{ ticket._id }}"
+					routerLink="/assignedticket/{{ ticket._id }}"
 					routerLinkActive="active"
 					*ngFor="let ticket of tickets | kanbanfilter : 'Completed'"
 				>
 					<p *ngIf="ticket.progress == 'Completed'">
-						Tenent: {{ ticket.propertyId }}
+						Tenant: {{ ticket.propertyId }}
 						<br />
 						Category: {{ ticket.type }}
 						<br />
@@ -98,7 +98,7 @@
 	</section>
 </div>
 
-<div *ngIf="!isMainView">
+<!-- <div *ngIf="!isMainView">
 	<h1>High Priority</h1>
 	<section class="w-dvw flex flex-row justify-center">
 		<div
@@ -114,7 +114,7 @@
 					*ngFor="let ticket of tickets | kanbanfilter : 'Backlog'"
 				>
 					<p>
-						Tenent: {{ ticket.propertyId }}
+						Tenant: {{ ticket.propertyId }}
 						<br />
 						Category: {{ ticket.type }}
 						<br />
@@ -125,6 +125,6 @@
 			</div>
 		</div>
 
-		<!--         routerLink="ticket/{{ticket.id}}" routerLinkActive="active" -->
-	</section>
-</div>
+      routerLink="ticket/{{ticket.id}}" routerLinkActive="active" -->
+	<!-- </section>
+</div> -->
