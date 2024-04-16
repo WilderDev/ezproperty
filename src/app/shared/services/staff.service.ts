@@ -30,7 +30,8 @@ export class StaffService {
 	getAllStaff(): Observable<any> {
 		return this.http
 			.get<{ success: boolean; data: { staff: Staff[] } }>(
-				`${environment.API_URL}/workers/get-all-workers`
+				`${environment.API_URL}/workers/get-all-workers`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data));
 	}
@@ -38,28 +39,33 @@ export class StaffService {
 	getStaffById(id: string) {
 		return this.http
 			.get<{ success: true; data: { staff: Staff } }>(
-				`${environment.API_URL}/workers/get-worker/${id}`
+				`${environment.API_URL}/workers/get-worker/${id}`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data.staff));
 	}
 
 	updateStaff(id: string, params: any) {
-		return this.http.patch(`${environment.API_URL}workers/edit/${id}`, params).pipe(
-			map((x) => {
-				const staff = { ...this.staffsub, ...params };
+		return this.http
+			.patch(`${environment.API_URL}workers/edit/${id}`, params, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					const staff = { ...this.staffsub, ...params };
 
-				this.staffsub.next(staff);
+					this.staffsub.next(staff);
 
-				return x;
-			})
-		);
+					return x;
+				})
+			);
 	}
 
 	deleteStaff(id: string) {
-		return this.http.delete(`${environment.API_URL}/workers/delete/${id}`).pipe(
-			map((x) => {
-				return x;
-			})
-		);
+		return this.http
+			.delete(`${environment.API_URL}/workers/delete/${id}`, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					return x;
+				})
+			);
 	}
 }

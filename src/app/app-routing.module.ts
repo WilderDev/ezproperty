@@ -46,7 +46,7 @@ const routes: Routes = [
 	},
 	{
 		path: "assignedtasks",
-		canActivate: [ManagerGuard],
+		canActivate: [StaffGuard],
 		component: MaintenanceStaffComponent
 	},
 	{

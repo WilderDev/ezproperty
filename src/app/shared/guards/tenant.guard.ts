@@ -18,7 +18,7 @@ export class TenantGuard {
 				// console.log(response);
 				const role = response.data.user.role;
 
-				if (role === "TENANT" || role === "STAFF" || role === "MANAGER") {
+				if (role === "TENANT" || role === "WORKER" || role === "MANAGER") {
 					return true; // this allows the user to access the route
 				}
 
