@@ -26,7 +26,7 @@ export class TenantTicketFormComponent implements OnInit {
 		priorityLevel: new FormControl("", [Validators.required]),
 		description: new FormControl("", [Validators.required]),
 		progress: new FormControl("BACKLOG"),
-		work: new FormArray([])
+		work: new FormControl("")
 	});
 
 	constructor(
@@ -38,44 +38,22 @@ export class TenantTicketFormComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		// const currentTenant = this.authService.me().subscribe((res) => {
-		// 	res = res.data.user._id;
-		// 	this.tenantService.getTenantById(res);
-		// 	return currentTenant;
-		// });
+		const currentTenant = this.authService.me().subscribe((res) => {
+			res = res.data.user._id;
+			this.tenantService.getTenantById(res);
+			return currentTenant;
+		});
 	}
 
 	// ON SUBMIT FUNCTION
 	onSubmit() {
-		console.log("hello");
-		// if (this.tenantIssueForm.invalid) return;
-		console.log("hello2");
+		if (this.tenantIssueForm.invalid) return;
 		const formValue = this.tenantIssueForm.getRawValue();
 		if (!formValue) return;
 		this.ticketservice.addNewTicket(formValue).subscribe((res) => {
 			console.log(res);
+			// Navigate to Home Page after Successful Register
+			this.router.navigate(["/tenantissueform"]);
 		});
 	}
-
-	onCheckChange(event) {
-		const formArray: FormArray = this.tenantIssueForm.get("work") as FormArray;
-
-		if (event.target.checked) {
-			formArray.push(new FormControl(event.target.value));
-		} else {
-			let i: number = 0;
-
-			formArray.controls.forEach((ctrl: FormControl) => {
-				if (ctrl.value == event.target.vaule) {
-					formArray.removeAt(i);
-					return;
-				}
-
-				i++;
-			});
-		}
-	}
 }
-
-//navigate to tenant issuse form on login
-// this.router.navigate(["/"])

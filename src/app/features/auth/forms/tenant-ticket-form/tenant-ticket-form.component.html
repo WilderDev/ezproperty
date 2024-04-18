@@ -1,30 +1,39 @@
 <form [formGroup]="tenantIssueForm" (ngSubmit)="onSubmit()">
-	<legend>Tenant Issues:</legend>
+	<legend class="flex justify-center font-semibold">Tenant Issues:</legend>
 
 	<!-- <div>Current Tenant {{  }}</div> -->
 	<div class="flex flex-col gap-1">
-		<label class="text-sm font-semibold">Tell us what is wrong</label>
-		<textarea name="Issues" id="Issues" cols="30" rows="10" required="true"></textarea>
-		<p>*Please enter your Issue here</p>
+		<label class="flex justify-center font-semibold">Tell us what is wrong</label>
+		<textarea
+			name="Issues"
+			id="Issues"
+			cols="30"
+			rows="10"
+			required="true"
+			formControlName="description"
+		></textarea>
+		<p class="flex justify-center font-semibold">*Please enter your Issue here</p>
 	</div>
 	<!-- types of Issuses -->
 	<div class="flex flex-col gap-1">
-		<label for="issuseType" class="text-sm font-semibold"
-			>What kind of Issue are you having?</label
+		<label class="form-label font-semibold">
+			Category:
+			<select name="typeSelect" formControlName="work">
+				<option value="Plumbing">Plumbing</option>
+				<option value="Electrical">Electrical</option>
+				<option value="Structural">Structural</option>
+				<option value="HVAC">HVAC</option>
+				<option value="General">General</option>
+				<option value="Pest">Pest</option>
+				<option value="Other">Other</option>
+			</select></label
 		>
-		<div *ngFor="let choice of specializations; let i = index">
-			<label for="">
-				<input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)" />{{
-					choice.description
-				}}
-			</label>
-		</div>
 	</div>
 	<!-- priority lvl of job -->
 	<!-- Dropdown menu -->
-	<div>
-		<label class="form-label">
-			Urgency
+	<div class="flex flex-col gap-1">
+		<label class="form-label font-semibold">
+			Urgency:
 			<select name="prioritySelect" formControlName="priorityLevel">
 				<option value="HIGH">High</option>
 				<option value="MEDIUM">Medium</option>

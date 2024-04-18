@@ -15,7 +15,7 @@ import { EmployeeComponent } from "./features/employees/employee/employee.compon
 import { RegisterTenantComponent } from "./features/auth/register-tenant/register-tenant.component";
 import { RegisterMaintenanceComponent } from "./features/auth/register-maintenance/register-maintenance.component";
 import { TenantTicketFormComponent } from "./features/auth/forms/tenant-ticket-form/tenant-ticket-form.component";
-
+import { TenantGuard } from "./shared/guards/tenant.guard";
 const routes: Routes = [
 	// {
 	// 	path: "",
@@ -72,6 +72,7 @@ const routes: Routes = [
 	},
 	{
 		path: "tenantissueform",
+		canActivate: [TenantGuard],
 		component: TenantTicketFormComponent
 	}
 	// {
