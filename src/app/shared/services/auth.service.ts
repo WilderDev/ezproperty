@@ -59,8 +59,9 @@ export class AuthService {
 	}
 
 	// Removes User from Session, Deletes Cookie, Routes to Landing Page
-	logout() {
-		this.cookieService.delete("token");
-		this.router.navigate(["/"]);
+	logout(): Observable<any> {
+		return this.httpClient.delete(`${environment.API_URL}/auth/logout`, {
+			withCredentials: true
+		});
 	}
 }

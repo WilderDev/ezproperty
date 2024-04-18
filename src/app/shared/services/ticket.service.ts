@@ -55,13 +55,19 @@ export class TicketService {
 			);
 	}
 
-	deleteTicket(id: string) {
-		return this.http
-			.delete(`${environment.API_URL}/tickets/delete/${id}`, { withCredentials: true })
-			.pipe(
-				map((x) => {
-					return x;
-				})
-			);
-	}
+    assignWorker (id: string, params: any) {
+      return this.http.patch(`${environment.API_URL}/tickets/edit/assign/${id}`, params, { withCredentials: true }).pipe(map(x => {
+        const ticket = {...this.ticketSub, ...params};
+
+        this.ticketSub.next(ticket);
+
+        return x
+      }))
+    }
+
+    deleteTicket (id: string) {
+      return this.http.delete(`${environment.API_URL}/tickets/delete/${id}`, { withCredentials: true }).pipe(map(x => {
+        return x
+      }))
+    }
 }

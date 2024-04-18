@@ -12,11 +12,11 @@ Password: manager
 
 Username: goofy
 Email: goofy@disney.com
-Password: staff
+Password: staff1
 
 Username: walt
 Email: walt@disney.com
-Password: staff
+Password: staff1
 
 ### TENANTS
 

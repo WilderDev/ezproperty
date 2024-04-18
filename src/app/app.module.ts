@@ -23,6 +23,7 @@ import { EmployeeComponent } from "./features/employees/employee/employee.compon
 import { KanbanFilterPipe } from "./shared/pipes/kanbanpipe";
 import { UrgencyFilterPipe } from "./shared/pipes/urgencypipe";
 import { TenantTicketFormComponent } from "./features/auth/forms/tenant-ticket-form/tenant-ticket-form.component";
+import { WorkerticketComponent } from "./features/kanban/workerticket/workerticket.component";
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -39,8 +40,10 @@ import { TenantTicketFormComponent } from "./features/auth/forms/tenant-ticket-f
 		EmployeeComponent,
 		KanbanFilterPipe,
 		UrgencyFilterPipe,
-		TenantTicketFormComponent
+		TenantTicketFormComponent,
+		WorkerticketComponent
 	],
+
 	imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
 	providers: [provideClientHydration(), provideHttpClient(withInterceptorsFromDi(), withFetch())],
 	bootstrap: [AppComponent]
