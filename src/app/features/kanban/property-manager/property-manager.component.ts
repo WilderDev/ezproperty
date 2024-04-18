@@ -17,8 +17,7 @@ export class PropertyManagerComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-      this.ticketService.getAllTickets().pipe(first()).subscribe(tickets => this.tickets = tickets)
-
+      this.ticketService.getAllTickets().pipe(first()).subscribe(tickets => { this.tickets = tickets, console.log(tickets)})
   }
 
   viewToggle() {
