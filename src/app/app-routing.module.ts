@@ -14,6 +14,7 @@ import { TenantComponent } from "./features/tenants/tenant/tenant.component";
 import { EmployeeComponent } from "./features/employees/employee/employee.component";
 import { RegisterTenantComponent } from "./features/auth/register-tenant/register-tenant.component";
 import { RegisterMaintenanceComponent } from "./features/auth/register-maintenance/register-maintenance.component";
+import { WorkerticketComponent } from "./features/kanban/workerticket/workerticket.component";
 
 const routes: Routes = [
 	// {
@@ -44,6 +45,11 @@ const routes: Routes = [
 		canActivate: [StaffGuard],
 		component: TicketComponent
 	},
+  {
+    path: "assignedticket/:id",
+    canActivate: [StaffGuard],
+    component: WorkerticketComponent
+  },
 	{
 		path: "assignedtasks",
 		canActivate: [StaffGuard],

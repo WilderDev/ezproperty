@@ -30,40 +30,44 @@ export class TenantService {
 	getAllTenants(): Observable<any> {
 		return this.http
 			.get<{ success: boolean; data: { tenants: Tenant[] } }>(
-				`${environment.API_URL}/tenants/get-all-tenants`
+				`${environment.API_URL}/tenants/get-all-tenants`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data));
-
-
 	}
 
 	getTenantById(id: string) {
 		return this.http
 			.get<{ success: true; data: { tenant: Tenant } }>(
-				`${environment.API_URL}/tenants/get-tenant/${id}`
+				`${environment.API_URL}/tenants/get-tenant/${id}`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data.tenant));
 	}
 
 	// NEED BACKEND ROUTE/CONTROLLER
 	updateTenant(id: string, params: any) {
-		return this.http.patch(`${environment.API_URL}/tenants/edit/${id}`, params).pipe(
-			map((x) => {
-				const tenant = { ...this.tenantSub, ...params };
+		return this.http
+			.patch(`${environment.API_URL}/tenants/edit/${id}`, params, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					const tenant = { ...this.tenantSub, ...params };
 
-				this.tenantSub.next(tenant);
+					this.tenantSub.next(tenant);
 
-				return x;
-			})
-		);
+					return x;
+				})
+			);
 	}
 
 	// NEED BACKEND ROUTE/CONTROLLER AUTH??
 	deleteTenant(id: string) {
-		return this.http.delete(`${environment.API_URL}/remove-tenant/${id}`).pipe(
-			map((x) => {
-				return x;
-			})
-		);
+		return this.http
+			.delete(`${environment.API_URL}/remove-tenant/${id}`, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					return x;
+				})
+			);
 	}
 }

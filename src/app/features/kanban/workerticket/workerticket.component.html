@@ -31,7 +31,7 @@
             </p>
 
             <hr class="border-slate-700 my-1">
-            <div class="flex flex-row">
+            <!-- <div class="flex flex-row">
             <p class="flex justify-between">Assigned To: {{this.ticket.assignedWorker}}</p> <br>
             <form [formGroup]="assignForm" (ngSubmit)="assignSubmit()">
             <select name="workerSelect" formControlName="assignedWorker">
@@ -40,9 +40,9 @@
 
             <button type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="assignSubmit" [disabled]="this.loading">Assign Worker</button>
           </form>
-            </div>
+            </div> -->
 
-            <hr class="border-slate-700 my-1">
+            <!-- <hr class="border-slate-700 my-1"> -->
             <p class="flex justify-between">
             Description: {{this.ticket?.description}}
           </p>
@@ -64,16 +64,16 @@
               <div>
                 <label class="form-label"> Current Status
                 <select name="statusSelect" formControlName="progress" placeholder="{{this.ticket.progress}}">
-
+<!--
                   <option value="Backlog">Backlog</option>
-                  <option value="In-Progress">In Progress</option>
+                  <option value="In-Progress">In Progress</option> -->
                   <option value="Blockage">Blocked</option>
                   <option value="Completed">Completed</option>
                 </select></label>
 
                 </div>
 
-                <div>
+                <!-- <div>
                   <label class="form-label"> Urgency
                     <select name="prioritySelect" formControlName="priorityLevel" placeholder="{{this.ticket.priorityLevel}}">
 
@@ -82,7 +82,7 @@
                       <option value="LOW">Low</option>
                     </select></label>
 
-                  </div>
+                  </div> -->
 
                   <div>
                     <label class="form-label"> Category
@@ -110,7 +110,7 @@
                       </div> -->
 
                       <div>
-                        <label class="form-label"> Description
+                        <label class="form-label"> Description or any Issues/Delays
                         <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" /></label>
 
                         </div>
@@ -125,7 +125,7 @@
 
         <div class="flex justify-between h-10 p-2">
 
-          <button *ngIf="!isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" routerLink="/adminmanager" routerLinkActive="active">Go Back</button>
+          <button *ngIf="!isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" routerLink="/assignedtasks" routerLinkActive="active">Go Back</button>
           <button *ngIf="isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Edit()">Cancel</button>
           <button *ngIf="isEditing" type="submit" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Submit()">Save Changes</button>
           <button *ngIf="!isEditing" class="bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded text-xs h-6" (click)="Edit()">Edit</button>

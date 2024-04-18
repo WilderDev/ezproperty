@@ -8,14 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { response } from 'express';
 import { WorkerService } from '../../../shared/services/worker.service';
 import { StaffService } from '../../../shared/services/staff.service';
-
-
 @Component({
-  selector: 'app-ticket',
-  templateUrl: './ticket.component.html',
-  styleUrl: './ticket.component.scss'
+  selector: 'app-workerticket',
+  templateUrl: './workerticket.component.html',
+  styleUrl: './workerticket.component.scss'
 })
-export class TicketComponent implements OnInit{
+export class WorkerticketComponent implements OnInit{
 
   form!: FormGroup;
   assignForm?: FormGroup;
@@ -43,10 +41,10 @@ export class TicketComponent implements OnInit{
 
       this.id = this.route.snapshot.params['id'];
 
-      this.assignForm = this.formBuilder.group({
-        assignedWorker: [''],
-        progress: ['In-Progress']
-      })
+      // this.assignForm = this.formBuilder.group({
+      //   assignedWorker: [''],
+      //   progress: ['In-Progress']
+      // })
 
       // form with validation rules
       this.form = this.formBuilder.group({
@@ -87,7 +85,7 @@ export class TicketComponent implements OnInit{
         next: () => {
 
           console.log('Ticket Saved')
-          this.router.navigateByUrl('/adminmanager');
+          this.router.navigateByUrl('/assignedtasks');
         },
         error: error => {
           this.submitting = false;
@@ -95,31 +93,31 @@ export class TicketComponent implements OnInit{
       })
   }
 
-  assignSubmit( ) {
+//   assignSubmit( ) {
 
-    console.log("form Values: ", this.form.value)
+//     console.log("form Values: ", this.form.value)
 
-    this.submitted = true;
+//     this.submitted = true;
 
-    this.loading = true
-    // stop here if form is invalid
-    if (this.assignForm.invalid) {
-      return;
-    }
+//     this.loading = true
+//     // stop here if form is invalid
+//     if (this.assignForm.invalid) {
+//       return;
+//     }
 
-    this.submitting = true;
-    this.assignWorker()
-    .pipe(first()).subscribe({
-      next: () => {
+//     this.submitting = true;
+//     this.assignWorker()
+//     .pipe(first()).subscribe({
+//       next: () => {
 
-        console.log('Ticket Saved')
-        this.router.navigateByUrl('/adminmanager');
-      },
-      error: error => {
-        this.submitting = false;
-      }
-    })
-}
+//         console.log('Ticket Saved')
+//         this.router.navigateByUrl('/adminmanager');
+//       },
+//       error: error => {
+//         this.submitting = false;
+//       }
+//     })
+// }
   Edit() {
     this.isEditing = !this.isEditing;
 
@@ -131,12 +129,11 @@ export class TicketComponent implements OnInit{
       : this.ticketService.updateTicket(this.id!, this.form.value)
     }
 
-    private assignWorker() {
-      return this.id
-      ?this.ticketService.assignWorker(this.id!, this.assignForm.value)
-      : this.ticketService.assignWorker(this.id!, this.assignForm.value)
-    }
+    // private assignWorker() {
+    //   return this.id
+    //   ?this.ticketService.assignWorker(this.id!, this.assignForm.value)
+    //   : this.ticketService.assignWorker(this.id!, this.assignForm.value)
+    // }
 
 
 }
-

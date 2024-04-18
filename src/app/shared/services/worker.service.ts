@@ -7,7 +7,6 @@ import { map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
 
 import { Worker } from "../models/worker";
-import { response } from "express";
 
 @Injectable({
 	providedIn: "root"
@@ -30,7 +29,8 @@ export class WorkerService {
 	getAllWorkers(): Observable<any> {
 		return this.http
 			.get<{ success: boolean; data: { workers: Worker[] } }>(
-				`${environment.API_URL}/workers/get-all-workers`
+				`${environment.API_URL}/workers/get-all-workers`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data.workers));
 	}
@@ -38,30 +38,35 @@ export class WorkerService {
 	getWorkerById(id: string) {
 		return this.http
 			.get<{ success: true; data: { worker: Worker } }>(
-				`${environment.API_URL}/workers/get-worker/${id}`
+				`${environment.API_URL}/workers/get-worker/${id}`,
+				{ withCredentials: true }
 			)
 			.pipe(map((response) => response.data.worker));
 	}
 
 	// NEED BACKEND ROUTE/CONTROLLER
 	updateWorker(id: string, params: any) {
-		return this.http.patch(`${environment.API_URL}/workers/edit/${id}`, params).pipe(
-			map((x) => {
-				const worker = { ...this.workerSub, ...params };
+		return this.http
+			.patch(`${environment.API_URL}/workers/edit/${id}`, params, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					const worker = { ...this.workerSub, ...params };
 
-				this.workerSub.next(worker);
+					this.workerSub.next(worker);
 
-				return x;
-			})
-		);
+					return x;
+				})
+			);
 	}
 
 	// NEED BACKEND ROUTE/CONTROLLER AUTH??
 	deleteWorker(id: string) {
-		return this.http.delete(`${environment.API_URL}/remove-worker/${id}`).pipe(
-			map((x) => {
-				return x;
-			})
-		);
+		return this.http
+			.delete(`${environment.API_URL}/remove-worker/${id}`, { withCredentials: true })
+			.pipe(
+				map((x) => {
+					return x;
+				})
+			);
 	}
 }
