@@ -40,10 +40,9 @@ export class LoginComponent {
 				if (res === "WORKER") {
 					return this.router.navigate(["assignedtasks"]);
 				}
-				// if(res === "TENANT") {
-				// return this.router.navigate([""])
-				// }
-				else {
+				if (res === "TENANT") {
+					return this.router.navigate(["tenantissueform"]);
+				} else {
 					return this.router.navigate(["/"]);
 				}
 			})

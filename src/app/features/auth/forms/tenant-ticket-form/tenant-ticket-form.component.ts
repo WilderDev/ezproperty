@@ -52,8 +52,6 @@ export class TenantTicketFormComponent implements OnInit {
 		if (!formValue) return;
 		this.ticketservice.addNewTicket(formValue).subscribe((res) => {
 			console.log(res);
-			// Navigate to Home Page after Successful Register
-			this.router.navigate(["/tenantissueform"]);
 		});
 	}
 }
