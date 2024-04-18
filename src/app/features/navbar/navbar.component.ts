@@ -46,6 +46,9 @@ export class NavbarComponent {
 
 	logout() {
 		this.isAuthenticated = false;
+    this.isManager = false;
+    this.isStaff = false;
+    this.isTenant = false;
 		this.authService.logout().subscribe((res) => {
 			this.router.navigate(["/"]);
 		});
