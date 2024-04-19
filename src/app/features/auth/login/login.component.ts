@@ -29,18 +29,19 @@ export class LoginComponent {
 
 		this.authSubscription.add(
 			this.authService.login(formValue).subscribe((res: any) => {
-				res = res.data.user.role;
+				const user = res.data.user.role;
 				console.log(res);
 
-				if (res === "MANAGER") {
+				if (user === "MANAGER") {
 					// Navigate to Home Page after Successful Register
+          console.log(res)
 					return this.router.navigate(["adminmanager"]);
 				}
 
-				if (res === "WORKER") {
+				if (user === "WORKER") {
 					return this.router.navigate(["assignedtasks"]);
 				}
-				if (res === "TENANT") {
+				if (user === "TENANT") {
 					return this.router.navigate(["tenantissueform"]);
 				} else {
 					return this.router.navigate(["/"]);
